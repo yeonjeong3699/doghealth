@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/doghealth/static/css/main.073c9b0a.css",
+    "main.js": "/doghealth/static/js/main.379a06d3.js",
+    "static/js/787.3e751639.chunk.js": "/doghealth/static/js/787.3e751639.chunk.js",
+    "index.html": "/doghealth/index.html",
+    "main.073c9b0a.css.map": "/doghealth/static/css/main.073c9b0a.css.map",
+    "main.379a06d3.js.map": "/doghealth/static/js/main.379a06d3.js.map",
+    "787.3e751639.chunk.js.map": "/doghealth/static/js/787.3e751639.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.073c9b0a.css",
+    "static/js/main.379a06d3.js"
+  ]
+}
