@@ -1,38 +1,42 @@
-.App {
-  text-align: center;
+/* font */
+@font-face {
+    font-family: 'Cafe24Ssurround';
+    src: url('../src/font/Cafe24Ssurround.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+@font-face {
+    font-family: 'Cafe24SsurroundAir';
+    src: url('../src/font/Cafe24Ssurroundair.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+@font-face {
+    font-family: 'NexonGothicLight';
+    src: url('../src/font/NEXONLv2GothicLight.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+@font-face {
+    font-family: 'NexonGothicRegular';
+    src: url('../src/font/NEXONLv2GothicRegular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
 
-.App-link {
-  color: #61dafb;
+@font-face {
+  font-family: 'NexonGothicMedium';
+  src: url('../src/font/NEXONLv2GothicMedium.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+@font-face {
+    font-family: 'NexonGothicBold';
+    src: url('../src/font/NEXONLv2GothicBold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }

@@ -1,17 +1,18 @@
 import './App.css';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import GlobalStyle from './style/GlobalStyle';
 import Nav from './component/Nav';
-
-const queryclient = new QueryClient();
+import { Route, Routes } from 'react-router-dom';
+import Main from './pages/Main';
 
 function App() {
   return (
     <>
-      <QueryClientProvider client={queryclient}>
-        <GlobalStyle />
-        <Nav />
-      </QueryClientProvider>
+      <GlobalStyle />
+      <Nav />
+
+      <Routes>
+        <Route path='/' element={<Main />} />
+      </Routes>
     </>
   );
 }

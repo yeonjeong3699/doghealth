@@ -8,7 +8,9 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import App from './App';
 import NotFound from './pages/NotFound';
 import Health from './pages/Health';
+import Head from './pages/Head';
 import FindHospital from './pages/FindHospital';
+
 
 const basename = process.env.PUBLIC_URL;
 
@@ -21,6 +23,10 @@ const routes = [
       {
         path: '/health',
         element: <Health />
+      },
+      {
+        path: '/health/head',
+        element: <Head />
       },
       {
         path: '/find-hospital',
