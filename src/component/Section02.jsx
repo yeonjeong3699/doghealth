@@ -6,7 +6,7 @@ import { PiPlayFill } from "react-icons/pi"
 
 export default function Section02() {
     return (
-        <Section02Container className="inner">
+        <Section02Container className="container">
             <p className="text">우리 집에서 가까운 동물병원 어디에 있을까?</p>
             <p className="title">집 근처 동물병원을 쉽게 찾아보세요!</p>
 
@@ -14,7 +14,7 @@ export default function Section02() {
                 바로가기<PiPlayFill className="icon" />
             </Link>
 
-            <img src={sec02_map} />
+            <img src={sec02_map} alt="병원찾기" />
         </Section02Container>
     )
 }
@@ -24,6 +24,7 @@ const Section02Container = styled.div`
     background-color: #ffefbe;
     padding: 105px 0px 0px 134px;
     box-sizing: border-box;
+    position: relative;
     .text{
         font-family: 'NexonGothicRegular';
         font-size: 30px;

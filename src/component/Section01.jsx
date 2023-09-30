@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 export default function Section01() {
     return (
-        <Section01Container className="inner">
+        <Section01Container className="container">
             <Link to='/health/head' className="item">
                 <p className="category">눈, 귀, 치아 등</p>
                 <p className="title">머리 자가진단</p>

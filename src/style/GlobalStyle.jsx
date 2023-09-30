@@ -53,12 +53,14 @@ a{
 }
 
 //preset
-.inner{
-    width: 1920px;
+.container{
+    max-width: 1920px;
     margin: 0px auto;
-    position: relative;
-    top: 0px;
-    left: 0px;
+}
+
+.on{
+	background-color: #f9ca64;
+	box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
 }
 `
 
