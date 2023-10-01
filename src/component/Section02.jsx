@@ -28,12 +28,12 @@ const Section02Container = styled.div`
     .text{
         font-family: 'NexonGothicRegular';
         font-size: 30px;
-        color: #222222;
+        color: #cda053;
     }
     .title{
         font-family: 'NexonGothicBold';
         font-size: 50px;
-        color: #222222;
+        color: #835b17;
         margin-top: 25px;
         margin-bottom: 90px;
     }
@@ -45,7 +45,7 @@ const Section02Container = styled.div`
         justify-content: center;
         align-items: center;
         gap: 20px;
-        background-color: #222222;
+        background-color: #835b17;
         color: white;
         font-family: 'NexonGothicRegular';
         font-size: 24px;

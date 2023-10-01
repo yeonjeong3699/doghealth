@@ -42,7 +42,7 @@ const Section01Container = styled.div`
         height: 300px;
         padding: 60px 0px 0px 40px;
         box-sizing: border-box;
-        background-color: #afafaf;
+        background-color: #c7d78e;
         border-radius: 25px;
         position: relative;
         .category{

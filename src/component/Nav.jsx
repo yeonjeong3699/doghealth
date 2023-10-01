@@ -42,6 +42,7 @@ const HeaderConatiner = styled.div`
     left: 50%;
     transform: translateX(-50%);
     z-index: 999;
+    transition: 0.5s;
     
     nav{
         .gnb{

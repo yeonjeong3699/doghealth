@@ -59,7 +59,7 @@ a{
 }
 
 .on{
-	background-color: #f9ca64;
+	background-color: rgba(0, 0, 0, 0.3);
 	box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
 }
 `
