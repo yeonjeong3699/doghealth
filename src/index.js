@@ -14,10 +14,10 @@ import FindHospital from './pages/FindHospital';
 
 const basename = process.env.PUBLIC_URL;
 
-const routes = [
+const routes = [ //연결을 하겠다고 선언. children 연결하려면 app.js에 있는 Routes에 연결을 해야 함.
   {
     path: '/',
-    element: <App/>,
+    element: <App />,
     errorElement: <NotFound />,
     children: [
       {

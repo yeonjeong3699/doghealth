@@ -28,7 +28,7 @@ export default function Slide() {
                 loop
                 effect={"fade"}
                 modules={[Autoplay, EffectFade]}
-                autoplay={{ delay: 3000 }}
+                autoplay={{ delay: 3000, disableOnInteraction: false }}
                 allowTouchMove={false}
             >
                 <SwiperSlide>
