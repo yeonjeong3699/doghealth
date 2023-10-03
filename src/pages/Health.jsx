@@ -51,7 +51,7 @@ export default function Health() {
                     <div className="text-box">
                         <p className="text">변, 피부, 혹 등</p>
                         <p className="title">몸 자가진단</p>
-                        <Link to='/health/head' className="link-btn">
+                        <Link to='/health/body' className="link-btn">
                             바로가기<PiPlayFill className="icon" />
                         </Link>
                     </div>
@@ -63,7 +63,7 @@ export default function Health() {
                     <div className="text-box">
                         <p className="text">슬개골, 발바닥 등</p>
                         <p className="title">다리 자가진단</p>
-                        <Link to='/health/head' className="link-btn">
+                        <Link to='/health/leg' className="link-btn">
                             바로가기<PiPlayFill className="icon" />
                         </Link>
                     </div>
@@ -84,9 +84,11 @@ export default function Health() {
 }
 
 const HealthContainer = styled.div`
+    padding-top: 110px;
+    box-sizing: border-box;
     .swiper-container{
         width: 100%;
-        height: 800px;
+        height: 690px;
         position: relative;
 
         //슬라이드 배경색
@@ -110,7 +112,8 @@ const HealthContainer = styled.div`
                 flex-direction: column;
                 gap: 25px;
                 position: absolute;
-                bottom: 27%;
+                top: 50%;
+                transform: translateY(-50%);
 
                 & > .text{
                     font-family: 'NexonGothicRegular';
@@ -152,8 +155,9 @@ const HealthContainer = styled.div`
             color: rgba(255, 255, 255, 0.8);
             font-size: 50px;
             position: absolute;
-            bottom: 43%;
+            top: 50%;
             left: 90px;
+            transform: translateY(-50%);
             z-index: 99;
             cursor: pointer;
         }
@@ -161,8 +165,9 @@ const HealthContainer = styled.div`
             color: rgba(255, 255, 255, 0.8);
             font-size: 50px;
             position: absolute;
-            bottom: 43%;
+            top: 50%;
             right: 90px;
+            transform: translateY(-50%);
             z-index: 99;
             cursor: pointer;
         }

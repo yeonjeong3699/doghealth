@@ -9,6 +9,9 @@ import App from './App';
 import NotFound from './pages/NotFound';
 import Health from './pages/Health';
 import Head from './pages/Head';
+import Body from './pages/Body';
+import Leg from './pages/Leg';
+import Post from './pages/Post';
 import FindHospital from './pages/FindHospital';
 
 
@@ -27,6 +30,18 @@ const routes = [ //연결을 하겠다고 선언. children 연결하려면 app.j
       {
         path: '/health/head',
         element: <Head />
+      },
+      {
+        path: '/health/body',
+        element: <Body />
+      },
+      {
+        path: '/health/leg',
+        element: <Leg />
+      },
+      {
+        path: '/health/post',
+        element: <Post />
       },
       {
         path: '/find-hospital',

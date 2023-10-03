@@ -3,21 +3,21 @@ import styled from "styled-components";
 import Content from "../component/Content";
 import { Link } from "react-router-dom";
 
-export default function Head() {
+export default function Body() {
     return (
-        <HeadContainer className="container">
+        <BodyContainer className="container">
             <div className="category-wrapper">
-                <Link to='/health/head' className="select">머리 자가진단</Link>
-                <Link to='/health/body'>몸 자가진단</Link>
+                <Link to='/health/head'>머리 자가진단</Link>
+                <Link to='/health/body' className="select">몸 자가진단</Link>
                 <Link to='/health/leg'>다리 자가진단</Link>
             </div>
 
             <Content />
-        </HeadContainer>
+        </BodyContainer>
     )
 }
 
-const HeadContainer = styled.div`
+const BodyContainer = styled.div`
     padding-top: 110px;
     box-sizing: border-box;
 

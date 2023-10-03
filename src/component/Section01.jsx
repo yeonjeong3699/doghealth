@@ -14,13 +14,13 @@ export default function Section01() {
                 <img src={sec01_01} />
             </Link>
 
-            <Link to='/health/head' className="item">
+            <Link to='/health/body' className="item">
                 <p className="category">변, 피부, 혹 등</p>
                 <p className="title">몸 자가진단</p>
                 <img src={sec01_02} />
             </Link>
 
-            <Link to='/health/head' className="item">
+            <Link to='/health/leg' className="item">
                 <p className="category">슬개골, 발바닥 등</p>
                 <p className="title">다리 자가진단</p>
                 <img src={sec01_03} />

@@ -62,6 +62,11 @@ a{
 	background-color: rgba(0, 0, 0, 0.3);
 	box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
 }
+
+.colorOn{
+	background-color: #a4a4a4;
+	box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+}
 `
 
 export default GlobalStyle;
