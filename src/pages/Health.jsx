@@ -84,16 +84,15 @@ export default function Health() {
 }
 
 const HealthContainer = styled.div`
-    padding-top: 110px;
-    box-sizing: border-box;
     .swiper-container{
         width: 100%;
-        height: 690px;
+        height: 800px;
+        margin-bottom: 70px;
         position: relative;
 
         //슬라이드 배경색
         .head{
-            background-color: #c8e5b7;
+            background-color: #d9e7a8;
         }
         .body{
             background-color: #bfdef1;
@@ -112,8 +111,7 @@ const HealthContainer = styled.div`
                 flex-direction: column;
                 gap: 25px;
                 position: absolute;
-                top: 50%;
-                transform: translateY(-50%);
+                top: 38%;
 
                 & > .text{
                     font-family: 'NexonGothicRegular';
@@ -155,9 +153,8 @@ const HealthContainer = styled.div`
             color: rgba(255, 255, 255, 0.8);
             font-size: 50px;
             position: absolute;
-            top: 50%;
+            top: 54%;
             left: 90px;
-            transform: translateY(-50%);
             z-index: 99;
             cursor: pointer;
         }
@@ -165,9 +162,8 @@ const HealthContainer = styled.div`
             color: rgba(255, 255, 255, 0.8);
             font-size: 50px;
             position: absolute;
-            top: 50%;
+            top: 54%;
             right: 90px;
-            transform: translateY(-50%);
             z-index: 99;
             cursor: pointer;
         }

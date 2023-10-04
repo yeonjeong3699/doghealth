@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import logo_white from "../images/logo_white.png";
 
 const GlobalStyle = createGlobalStyle`
 /* v2.0 | 20110126
@@ -59,13 +60,40 @@ a{
 }
 
 .on{
-	background-color: rgba(0, 0, 0, 0.3);
+	background-color: rgba(0, 0, 0, 0.4);
 	box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
 }
 
-.colorOn{
-	background-color: #a4a4a4;
-	box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+.navChangeOn{
+    border-bottom: solid 1px rgba(255, 255, 255, 0.5);
+    background-color: rgba(199, 215, 142, 0.8);
+	box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+
+    .header-left{
+		h1{
+            a{
+                background: url(${logo_white}) no-repeat;
+            }
+        }
+
+        nav{
+            .gnb{
+                li{
+                    a{
+                        font-family: 'NexonGothicMedium';
+                        font-size: 25px;
+                        color: white;
+                        text-shadow: none;
+                    }
+                }
+            }
+        }
+    }
+
+    .login{
+        font-size: 32px;
+        color: white;
+    }
 }
 `
 

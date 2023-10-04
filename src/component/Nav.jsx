@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import logo_white from "../images/logo_white.png";
 import { BsPersonCircle } from "react-icons/bs"
 
-export default function Nav() {
-    const location = useLocation();
-    const url = location.pathname;
 
+export default function Nav() {
     const [scroll, setScroll] = useState(0);
 
     const scrollMove = () => {
@@ -20,23 +18,20 @@ export default function Nav() {
 
     
     return (
-        <HeaderConatiner className={url === '/' ?
-            (scroll > 0 ? 'container on' : 'container') :
-            (scroll > 0 ? 'container colorOn' : 'container colorOn')
-        }>
+        <HeaderConatiner className={scroll > 0 ? 'container on' : 'container'}>
             <div className="header-left">
-                <h1><Link to='/'><img src={logo_white} alt="견강검진" /></Link></h1>
+                <h1><Link to='/'></Link></h1>
 
                 <nav>
                     <ul className="gnb">
                         <li><Link to='/health'>자가진단</Link></li>
                         <li><Link to='/find-hospital'>병원찾기</Link></li>
-                        <li><Link to=''>커뮤니티</Link></li>
+                        <li><Link to='/community'>커뮤니티</Link></li>
                     </ul>
                 </nav>
             </div>
 
-            <Link to='/' className="login"><BsPersonCircle /></Link>
+            <Link to='/login' className="login"><BsPersonCircle /></Link>
         </HeaderConatiner >
     )
 }
@@ -60,6 +55,16 @@ const HeaderConatiner = styled.div`
         display: flex;
         align-items: center;
         gap: 95px;
+
+        h1{
+            a{
+                display: block;
+                width: 242px;
+                height: 46px;
+                background: url(${logo_white}) no-repeat;
+            }
+        }
+
         nav{
             .gnb{
                 display: flex;
@@ -69,7 +74,6 @@ const HeaderConatiner = styled.div`
                         font-family: 'NexonGothicMedium';
                         font-size: 25px;
                         color: white;
-                        text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
                     }
                 }
             }
@@ -79,6 +83,5 @@ const HeaderConatiner = styled.div`
     .login{
         font-size: 32px;
         color: white;
-        text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
     }
 `
