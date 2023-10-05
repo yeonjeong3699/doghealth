@@ -17,6 +17,7 @@ import Post from './pages/Post';
 import FindHospital from './pages/FindHospital';
 import Community from './pages/Community';
 import Login from './pages/Login';
+import ScrollTop from './component/ScrollTop';
 
 
 
@@ -26,6 +27,7 @@ function App() {
 
   return (
     <>
+      <ScrollTop />
       <GlobalStyle />
       {url === '/' || url === '/health' ? <Nav /> : <NavChange />}
 
