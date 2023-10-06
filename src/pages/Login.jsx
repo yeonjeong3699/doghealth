@@ -5,7 +5,7 @@ import styled from "styled-components";
 export default function Login() {
     return (
         <LoginContainer className="container">
-            <h2>LOGIN</h2>
+            <h2>로그인</h2>
 
             <form action="" method="">
                 <div className="input-box">
@@ -26,7 +26,6 @@ export default function Login() {
 }
 
 const LoginContainer = styled.div`
-    padding-top: 110px;
     padding: 200px 0px 100px;
     box-sizing: border-box;
     display: flex;

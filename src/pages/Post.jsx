@@ -141,7 +141,6 @@ export default function Post() {
 }
 
 const PostContainer = styled.div`
-    padding-top: 110px;
     padding: 110px 360px 150px;
     box-sizing: border-box;
 
