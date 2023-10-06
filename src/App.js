@@ -3,6 +3,7 @@ import GlobalStyle from './style/GlobalStyle';
 import { Route, Routes, useLocation } from 'react-router-dom';
 
 //component
+import ScrollTop from './component/ScrollTop';
 import Nav from './component/Nav';
 import NavChange from './component/NavChange';
 import Footer from './component/Footer';
@@ -17,7 +18,7 @@ import Post from './pages/Post';
 import FindHospital from './pages/FindHospital';
 import Community from './pages/Community';
 import Login from './pages/Login';
-import ScrollTop from './component/ScrollTop';
+import Member from './pages/Member';
 
 
 
@@ -43,6 +44,7 @@ function App() {
         <Route path='/find-hospital' element={<FindHospital />} />
         <Route path='/community' element={<Community />} />
         <Route path='/login' element={<Login />} />
+        <Route path='/member' element={<Member />} />
 
       </Routes>
 

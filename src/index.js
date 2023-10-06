@@ -15,6 +15,7 @@ import Post from './pages/Post';
 import FindHospital from './pages/FindHospital';
 import Community from './pages/Community';
 import Login from './pages/Login';
+import Member from './pages/Member';
 
 
 const basename = process.env.PUBLIC_URL;
@@ -56,6 +57,10 @@ const routes = [ //연결을 하겠다고 선언. children 연결하려면 app.j
       {
         path: '/login',
         element: <Login />
+      },
+      {
+        path: '/member',
+        element: <Member />
       }
     ]
   }
