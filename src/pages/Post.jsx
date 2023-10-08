@@ -15,9 +15,9 @@ export default function Post() {
                     <IoIosArrowForward className="icon" />
                     <Link to='/health'>카테고리</Link>
                     <IoIosArrowForward className="icon" />
-                    <Link to='/health'>키워드</Link>
+                    <p>키워드</p>
                     <IoIosArrowForward className="icon" />
-                    <Link to='/health'>제목제목제목제목제목제목제목</Link>
+                    <p>제목제목제목제목제목제목제목</p>
                 </div>
 
                 <div className="title-box">
@@ -150,7 +150,7 @@ const PostContainer = styled.div`
         gap: 4px;
         margin-top: 100px;
 
-        & > a{
+        & > a, p{
             font-family: 'NexonGothicLight';
             font-weight: 900;
             font-size: 18px;
