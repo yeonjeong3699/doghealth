@@ -15,11 +15,11 @@ import Head from './pages/Head';
 import Body from './pages/Body';
 import Leg from './pages/Leg';
 import Post from './pages/Post';
+import NewPost from './pages/NewPost';
 import FindHospital from './pages/FindHospital';
 import Community from './pages/Community';
 import Login from './pages/Login';
 import Member from './pages/Member';
-
 
 
 function App() {
@@ -40,6 +40,7 @@ function App() {
         <Route path='/health/body' element={<Body />} />
         <Route path='/health/leg' element={<Leg />} />
         <Route path='/health/post' element={<Post />} />
+        <Route path='/health/newPost' element={<NewPost />} />
 
         <Route path='/find-hospital' element={<FindHospital />} />
         <Route path='/community' element={<Community />} />

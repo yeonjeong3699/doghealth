@@ -12,6 +12,7 @@ import Head from './pages/Head';
 import Body from './pages/Body';
 import Leg from './pages/Leg';
 import Post from './pages/Post';
+import NewPost from './pages/NewPost';
 import FindHospital from './pages/FindHospital';
 import Community from './pages/Community';
 import Login from './pages/Login';
@@ -45,6 +46,10 @@ const routes = [ //연결을 하겠다고 선언. children 연결하려면 app.j
       {
         path: '/health/post',
         element: <Post />
+      },
+      {
+        path: '/health/newPost',
+        element: <NewPost />
       },
       {
         path: '/find-hospital',

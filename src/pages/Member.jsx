@@ -4,7 +4,7 @@ import { joinMember } from "../api/firebase";
 
 export default function Member() {
     const [memberName, setMemberName] = useState('');
-    const [memberMail, setMemberMail] = useState('');
+    const [memberEmail, setMemberEmail] = useState('');
     const [memberPw, setMemberPw] = useState('');
 
     const [idError, setIdError] = useState('');
@@ -18,7 +18,7 @@ export default function Member() {
         }
 
         try {
-            const user = await joinMember(memberName, memberMail, memberPw);
+            const user = await joinMember(memberName, memberEmail, memberPw);
             console.log(user);
         } catch (error) {
             console.error(error);
@@ -32,7 +32,7 @@ export default function Member() {
 
             <form onSubmit={signUpEvent}>
                 <div className="input-box">
-                    <label for="memberName">이름</label>
+                    <label htmlFor="memberName">이름</label>
                     <input
                         type="text"
                         id="memberName"
@@ -44,19 +44,19 @@ export default function Member() {
                 </div>
 
                 <div className="input-box">
-                    <label for="memberMail">이메일</label>
+                    <label htmlFor="memberEmail">이메일</label>
                     <input
                         type="text"
-                        id="memberMail"
+                        id="memberEmail"
                         placeholder="이메일을 입력해 주세요."
                         required
-                        value={memberMail}
-                        onChange={(e) => setMemberMail(e.target.value)}
+                        value={memberEmail}
+                        onChange={(e) => setMemberEmail(e.target.value)}
                     />
                 </div>
 
                 <div className="input-box">
-                    <label for="memberPw">비밀번호</label>
+                    <label htmlFor="memberPw">비밀번호</label>
                     <input
                         type="password"
                         id="memberPw"

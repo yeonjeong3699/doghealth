@@ -1,25 +1,31 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { googleLogin } from "../api/firebase";
 
 export default function Login() {
+    const login = async () => {
+        const user = await googleLogin();
+    }
+
     return (
         <LoginContainer className="container">
             <h2>로그인</h2>
 
             <form action="" method="">
                 <div className="input-box">
-                    <label for="userId">아이디</label>
+                    <label htmlFor="userId">아이디</label>
                     <input type="text" id="userId" placeholder="아이디를 입력해 주세요." required />
                 </div>
 
                 <div className="input-box">
-                    <label for="userPw">비밀번호</label>
+                    <label htmlFor="userPw">비밀번호</label>
                     <input type="password" id="userPw" placeholder="비밀번호를 입력해 주세요." required />
                 </div>
 
                 <button className="login-btn">로그인</button>
                 <Link to='/member' className="member-btn">회원가입</Link>
+                <button onClick={login}>구글 로그인</button>
             </form>
         </LoginContainer>
     )
