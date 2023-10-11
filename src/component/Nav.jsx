@@ -3,10 +3,24 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import logo_white from "../images/logo_white.png";
 import { BsFillPencilFill, BsPersonCircle } from "react-icons/bs"
+import { RiLogoutCircleRLine } from "react-icons/ri"
+import { userState, logout } from "../api/firebase";
 
 
 export default function Nav() {
+    const [user, setUser] = useState();
     const [scroll, setScroll] = useState(0);
+
+    useEffect(() => {
+        userState((user) => {
+            console.log(user)
+            setUser(user);
+        })
+    })
+
+    const useLogout = () => {
+        logout().then(setUser)
+    }
 
     const scrollMove = () => {
         setScroll(window.scrollY);
@@ -32,9 +46,18 @@ export default function Nav() {
             </div>
 
             <div className="header-right">
-                <Link to='/health/newPost' className="write"><BsFillPencilFill /></Link>
-                <Link to='/login' className="login"><BsPersonCircle /></Link>
+                {user && user.isAdmin &&
+                    <Link to='/health/newPost' className="write"><BsFillPencilFill /></Link>
+                }
+
+                {user ?
+                    (<>{user && <button onClick={useLogout} className="logout-btn"><RiLogoutCircleRLine className="logout" /></button>}</>) :
+                    (<Link to='/login' className="login"><BsPersonCircle /></Link>)
+                }
             </div>
+
+
+
         </HeaderConatiner >
     )
 }
@@ -96,6 +119,17 @@ const HeaderConatiner = styled.div`
         .login{
             font-size: 32px;
             color: white;
+        }
+
+        .logout-btn{
+            background: transparent;
+            border: none;
+
+            .logout{
+                font-size: 32px;
+                color: white;
+                cursor: pointer;
+            }
         }
     }
 `

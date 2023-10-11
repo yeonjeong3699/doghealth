@@ -1,25 +1,29 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { joinMember } from "../api/firebase";
+import { useNavigate } from "react-router-dom";
 
 export default function Member() {
-    const [memberName, setMemberName] = useState('');
     const [memberEmail, setMemberEmail] = useState('');
     const [memberPw, setMemberPw] = useState('');
 
-    const [idError, setIdError] = useState('');
+    const [emailError, setEmailError] = useState('');
     const [pwError, setPsError] = useState('');
+
+    const navigate = useNavigate();
 
     const signUpEvent = async (e) => {
         e.preventDefault();
 
-        if (memberPw.length < 8) {
-            setPsError('비밀번호는 8글자 이상이어야 합니다.');
-        }
-
         try {
-            const user = await joinMember(memberName, memberEmail, memberPw);
+            const user = await joinMember(memberEmail, memberPw);
             console.log(user);
+            if (memberPw.length < 8) {
+                setPsError('비밀번호는 8글자 이상이어야 합니다.');
+            } else {
+                navigate('/')
+            }
+
         } catch (error) {
             console.error(error);
         }
@@ -32,21 +36,9 @@ export default function Member() {
 
             <form onSubmit={signUpEvent}>
                 <div className="input-box">
-                    <label htmlFor="memberName">이름</label>
-                    <input
-                        type="text"
-                        id="memberName"
-                        placeholder="이름을 입력해 주세요."
-                        required
-                        value={memberName}
-                        onChange={(e) => setMemberName(e.target.value)}
-                    />
-                </div>
-
-                <div className="input-box">
                     <label htmlFor="memberEmail">이메일</label>
                     <input
-                        type="text"
+                        type="email"
                         id="memberEmail"
                         placeholder="이메일을 입력해 주세요."
                         required

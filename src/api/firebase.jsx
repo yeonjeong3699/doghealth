@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { getDatabase } from "firebase/database";
+import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+import { getDatabase, get, ref } from "firebase/database";
 
 
 const firebaseConfig = {
@@ -21,17 +21,18 @@ export { auth };
 
 
 //회원가입
-export async function joinMember(userName, email, password) {
+export async function joinMember(email, password) {
     const auth = getAuth();
 
     try {
-        const userCredential = await createUserWithEmailAndPassword(auth, userName, email, password);
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
         console.log(user);
     } catch (error) {
         console.error(error);
     }
 }
+
 
 //구글 로그인
 export async function googleLogin() {
@@ -43,4 +44,53 @@ export async function googleLogin() {
         }).catch(console.error);
 }
 
-//
+//이메일 로그인
+export async function emailLogin(email, password) {
+    try {
+        const userCredential = await signInWithEmailAndPassword(auth, email, password); //signInWithEmailAndPassword: 회원 정보 확인
+        return userCredential.user;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+
+//로그아웃
+export async function logout() {
+    signOut(auth).then(() => {
+
+    }).catch((error) => {
+
+    });
+}
+
+
+//자동 로그인 방지
+provider.setCustomParameters({
+    prompt: 'select_account'
+})
+
+
+//사용자의 정보를 받아올 함수
+export function userState(callback) {
+    onAuthStateChanged(auth, async (user) => {
+        const userUpdate = user ? await adminUser(user) : user;
+        callback(userUpdate)
+    })
+}
+
+async function adminUser(user) {
+    try {
+        const adminState = await get(ref(database, 'admin'));
+
+        if (adminState.exists()) {
+            const admins = adminState.val();
+            const isAdmin = admins.includes(user.email)
+            return { ...user, isAdmin };
+        }
+        return user;
+    } catch (error) {
+        console.error(error)
+        throw error
+    }
+}
