@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
-import { getDatabase, get, ref } from "firebase/database";
+import { getDatabase, get, ref, set } from "firebase/database";
+import { v4 as uuid } from 'uuid'
 
 
 const firebaseConfig = {
@@ -93,4 +94,25 @@ async function adminUser(user) {
         console.error(error)
         throw error
     }
+}
+
+//파이어베이스에 게시글 업로드
+export async function addPost(category, keyword, title) {
+    const id = uuid();
+    return set(ref(database, `/post/${id}`), {
+        id,
+        category,
+        keyword,
+        title,
+    })
+}
+
+//파이어베이스의 데이터베이스에 있는 게시글 가져오기
+export async function getPost() {
+    return get(ref(database, 'posts')).then((snapshot) => {
+        if (snapshot.exists()) {
+            return Object.values(snapshot.val())
+        }
+        return []
+    })
 }

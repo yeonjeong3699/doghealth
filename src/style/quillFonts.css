@@ -1,0 +1,71 @@
+@font-face {
+  font-family: 'NexonGothicLight';
+  src: url('../font/NEXONLv2GothicLight.woff') format('woff');
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'NexonGothicRegular';
+  src: url('../font/NEXONLv2GothicRegular.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'NexonGothicMedium';
+  src: url('../font/NEXONLv2GothicMedium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'NexonGothicBold';
+  src: url('../font/NEXONLv2GothicBold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+
+
+.ql-picker.ql-font .ql-picker-label[data-value="NexonGothicLight"]::before,
+.ql-picker.ql-font .ql-picker-item[data-value="NexonGothicLight"]::before {
+  font-family: "NexonGothicLight", cursive;
+  content: "NexonGothicLight" !important;
+  ;
+}
+
+.ql-picker.ql-font .ql-picker-label[data-value="NexonGothicRegular"]::before,
+.ql-picker.ql-font .ql-picker-item[data-value="NexonGothicRegular"]::before {
+  font-family: "NexonGothicRegular", cursive;
+  content: "NexonGothicRegular" !important;
+  ;
+}
+
+.ql-picker.ql-font .ql-picker-label[data-value="NexonGothicMedium"]::before,
+.ql-picker.ql-font .ql-picker-item[data-value="NexonGothicMedium"]::before {
+  font-family: "NexonGothicMedium", cursive;
+  content: "NexonGothicMedium" !important;
+}
+
+.ql-picker.ql-font .ql-picker-label[data-value="NexonGothicBold"]::before,
+.ql-picker.ql-font .ql-picker-item[data-value="NexonGothicBold"]::before {
+  font-family: "NexonGothicBold", cursive;
+  content: "NexonGothicBold" !important;
+}
+
+/* Set content font-families */
+.ql-font-NexonGothicLight {
+  font-family: "NexonGothicLight";
+}
+
+.ql-font-NexonGothicMedium {
+  font-family: "NexonGothicMedium";
+}
+
+.ql-font-NexonGothicRegular {
+  font-family: "NexonGothicRegular";
+}
+
+.ql-font-NexonGothicBold {
+  font-family: "NexonGothicBold";
+}
