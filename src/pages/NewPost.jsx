@@ -1,26 +1,47 @@
 import React from "react";
 import styled from "styled-components";
 
+//React-quill
+import ReactQuill, { Quill } from "react-quill";
+import 'react-quill/dist/quill.snow.css';
+
+//font
+// import NexonGothicLight from "../font"
+
+
 export default function NewPost() {
-    //카테고리, 키워드, 제목, 날짜, 이미지, 내용(원인, 증상, 위험성, 치료 방법, 예방 방법, 관리 방법), 출처
+    //인덱스 자동 생성, 카테고리, 키워드, 제목, 날짜
+    //이미지, 내용
+    //출처
+
+    // const Font = Quill.import("src/font")
+    // Font.whitelist = ['NexonGothicLight', 'NexonGothicRegular', 'NexonGothicMedium', 'NexonGothicBold']
+    // Quill.register(Font, true)
+
+    const modules = {
+        toolbar: {
+            container: [
+                ["image"],
+                [{ 'font': ['NexonGothicLight', 'NexonGothicRegular', 'NexonGothicMedium', 'NexonGothicBold'] }],
+                // [{ 'font': Font }],
+                [{ 'size': ['small', false, 'large', 'huge'] }],
+                [{ 'header': 1 }, { 'header': 2 }],
+                ['bold', 'underline'],
+                [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                [{ 'align': [] }],
+                [{ 'color': [] }, { 'background': [] }],
+                ['clean']
+            ]
+        }
+    }
 
     return (
         <NewPostContainer className="container">
-            <form>
-                <select name="category">
-                    <option>카테고리 선택</option>
-                    <option>머리 자가진단</option>
-                    <option>몸 자가진단</option>
-                    <option>다리 자가진단</option>
-                </select>
 
-                <input type="text" name="keyword" placeholder="키워드"/>
-                <input type="text" name="title" placeholder="제목"/>
-                <input type="date" name="date"/>
-                <input type="file" name="img" accept="img/*" />
-                
-
-            </form>
+            <ReactQuill
+                modules={modules}
+                theme="snow"
+            />
         </NewPostContainer>
     )
 }
