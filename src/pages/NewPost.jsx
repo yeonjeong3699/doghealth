@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { addPost } from "../api/firebase";
+import { addImg, addPost } from "../api/firebase";
 
 //React-quill
 import ReactQuill, { Quill } from "react-quill";
@@ -9,10 +9,9 @@ import 'react-quill/dist/quill.snow.css';
 import '../style/quillFonts.css';
 
 
+
 export default function NewPost() {
-    //인덱스 자동 생성, 카테고리, 키워드, 제목, 날짜 자동
-    //이미지, 내용
-    //출처
+    //해야할 것: 인덱스 자동 생성, 날짜 자동, 이미지, 출처
 
     const navigate = useNavigate();
 
@@ -20,12 +19,17 @@ export default function NewPost() {
     const [keyword, setKeyword] = useState('');
     const [title, setTitle] = useState('');
 
+    const [imageUpload, setImageUpload] = useState(null);
+    const [imageList, setImageList] = useState([]);
+
+
 
     //게시글 업로드
     const onSubmit = async (e) => {
         e.preventDefault();
 
         try {
+            await addImg(imageUpload, setImageList)
             await addPost(category, keyword, title);
             navigate('/health');
         } catch (error) {
@@ -42,7 +46,7 @@ export default function NewPost() {
         toolbar: {
             container: [
                 ["image"],
-                [{ 'font': ['NexonGothicLight', 'NexonGothicRegular', 'NexonGothicMedium', 'NexonGothicBold'] }],
+                [{ 'font': ['', 'NexonGothicLight', 'NexonGothicRegular', 'NexonGothicMedium', 'NexonGothicBold'] }],
                 [{ 'size': ['small', false, 'large', 'huge'] }],
                 [{ 'header': 1 }, { 'header': 2 }],
                 ['bold', 'underline'],
@@ -97,7 +101,18 @@ export default function NewPost() {
                     />
                 </div>
 
-                <input type='file' name='file' accept="img/*" />
+                <input
+                    className="img-upload"
+                    type='file'
+                    name='file'
+                    accept="img/*"
+                    onChange={(e) => {
+                        setImageUpload(e.target.files[0]);
+                    }}
+                />
+                {imageList.map((el) => {
+                    return <img key={el} src={el} />;
+                })}
             </form>
 
             <ReactQuill
@@ -172,6 +187,13 @@ const NewPostContainer = styled.div`
                 font-size: 16px;
                 text-indent: 4px;
             }
+        }
+
+        .img-upload{
+            font-family: 'NexonGothicRegular';
+            font-size: 16px;
+            color: #333333;
+            margin-top: 12px;
         }
     }
 

@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import { getDatabase, get, ref, set } from "firebase/database";
+import { getDownloadURL, getStorage, ref as storageRef, uploadBytes } from "firebase/storage";
 import { v4 as uuid } from 'uuid'
 
 
@@ -9,6 +10,8 @@ const firebaseConfig = {
     authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
     projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
     databaseURL: process.env.REACT_APP_FIREBASE_DB_URL,
+    storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_STORAGE_MESSAGINGSENDERID
 };
 
 
@@ -33,7 +36,6 @@ export async function joinMember(email, password) {
         console.error(error);
     }
 }
-
 
 //구글 로그인
 export async function googleLogin() {
@@ -65,12 +67,10 @@ export async function logout() {
     });
 }
 
-
 //자동 로그인 방지
 provider.setCustomParameters({
     prompt: 'select_account'
 })
-
 
 //사용자의 정보를 받아올 함수
 export function userState(callback) {
@@ -96,18 +96,19 @@ async function adminUser(user) {
     }
 }
 
-//파이어베이스에 게시글 업로드
-export async function addPost(category, keyword, title) {
+//데이터베이스에 게시글 업로드
+export async function addPost(category, keyword, title, image) {
     const id = uuid();
     return set(ref(database, `/post/${id}`), {
         id,
         category,
         keyword,
         title,
+        image
     })
 }
 
-//파이어베이스의 데이터베이스에 있는 게시글 가져오기
+//데이터베이스에 있는 게시글 가져오기
 export async function getPost() {
     return get(ref(database, 'posts')).then((snapshot) => {
         if (snapshot.exists()) {
@@ -115,4 +116,21 @@ export async function getPost() {
         }
         return []
     })
+}
+
+//스토리지에 이미지 업로드
+export async function addImg(imageUpload, imageList) {
+    const storage = getStorage();
+
+    try {
+        const imgRef = storageRef(storage, `images/${imageUpload.name}`);
+
+        uploadBytes(imgRef, imageUpload).then((snapshot) => {
+            getDownloadURL(snapshot.ref).then((url) => {
+                imageList((prev) => [...prev, url]);
+            });
+        });
+    } catch (error) {
+        console.error(error);
+    }
 }

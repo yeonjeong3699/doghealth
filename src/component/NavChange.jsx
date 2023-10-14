@@ -13,7 +13,6 @@ export default function Nav() {
 
     useEffect(() => {
         userState((user) => {
-            console.log(user)
             setUser(user);
         })
     })
