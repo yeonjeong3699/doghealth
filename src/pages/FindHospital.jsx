@@ -4,82 +4,51 @@ import styled from "styled-components";
 import hospital from "../json/hopital.json";
 
 export default function FindHospital() {
-    const [open, setOpen] = useState(false);
     const EventMarkerContainer = ({ position, content }) => {
-        const map = useMap()
-        
+        const map = useMap();
+        const [isVisible, setIsVisible] = useState(false);
 
         return (
             <MapMarker
                 position={position}
-                image={{
-                    src: "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png",
-                    size: {
-                        width: 24,
-                        height: 35,
-                    }
-                }}
-                onClick={() => setOpen(true)}
+                onMouseOver={() => setIsVisible(true)}
+                onMouseOut={() => setIsVisible(false)}
             >
-                {open && content}
+                {isVisible && content}
             </MapMarker>
         )
     }
-
-    const content = <div className="wrap">
-        <div className="info">
-            <div className="title">
-                카카오 스페이스닷원
-                <div
-                    className="close"
-                    onClick={() =>setOpen(false)}
-                    title="닫기"
-                >닫기</div>
-            </div>
-            <div className="body">
-                <div className="img">
-                    <img
-                        src="//t1.daumcdn.net/thumb/C84x76/?fname=http://t1.daumcdn.net/cfile/2170353A51B82DE005"
-                        width="73"
-                        height="70"
-                        alt="카카오 스페이스닷원"
-                    />
-                </div>
-                <div className="desc">
-                    <div className="ellipsis">
-                        제주특별자치도 제주시 첨단로 242
-                    </div>
-                    <div className="jibun ellipsis">
-                        (우) 63309 (지번) 영평동 2181
-                    </div>
-                    <div>
-                        <a
-                            href="https://www.kakaocorp.com/main"
-                            target="_blank"
-                            className="link"
-                            rel="noreferrer"
-                        >
-                            홈페이지
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
     return (
         <FindHospitalContainer className="container">
             <Map
                 className="kakao-map"
                 center={{ lat: 37.566535, lng: 126.9779692 }}
-                style={{ width: '800px', height: '600px' }}
+                style={{ width: '1600px', height: '800px' }}
                 level={10}
             >
                 {hospital.hospitalList.map((value) => (
                     <EventMarkerContainer
                         key={`EventMarkerContainer-${value.latlng.lat}-${value.latlng.lng}`}
                         position={value.latlng}
-                        content={content}
+                        content={
+                            <div className="content-wrapper">
+                                <div className="content-box">
+                                    <span className="infor-title">이름</span>
+                                    <span className="infor">{value.title}</span>
+                                </div>
+
+                                <div className="content-box">
+                                    <span className="infor-title">전화</span>
+                                    <span className="infor">{value.tel}</span>
+                                </div>
+
+                                <div className="content-box">
+                                    <span className="infor-title">주소</span>
+                                    <span className="infor">{value.address}</span>
+                                </div>
+                            </div>
+                        }
                     />
                 ))}
 
@@ -94,7 +63,35 @@ const FindHospitalContainer = styled.div`
     box-sizing: border-box;
 
     .kakao-map{
-        width: 500px;
-        height: 500px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .content-wrapper{
+        width: 100%;
+        height: 100%;
+        padding: 5px;
+        box-sizing: border-box;
+
+        .content-box{
+            margin-bottom: 3px;
+
+            &:last-of-type{
+                margin-bottom: 0px;
+            }
+            
+            .infor-title{
+                font-family: 'NexonGothicRegular';
+                font-size: 16px;
+                color: #222222;
+                margin-right: 5px;
+            }
+
+            .infor{
+                font-family: 'NexonGothicLight';
+                font-size: 16px;
+                color: #222222;
+            }
+        }
     }
 `
