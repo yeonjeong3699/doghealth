@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { CustomOverlayMap, Map, MapMarker, ZoomControl, useMap } from "react-kakao-maps-sdk";
+import { Map, MapMarker, ZoomControl, useMap } from "react-kakao-maps-sdk";
 import styled from "styled-components";
 import hospital from "../json/hopital.json";
 

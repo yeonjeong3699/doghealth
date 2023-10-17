@@ -95,6 +95,15 @@ a{
         color: white;
     }
 }
+
+.alert{
+    font-family: 'Cafe24Ssurround';
+    font-size: 34px;
+    color: #a5a5a5;
+    text-align: center;
+    padding: 210px 0px 100px;
+    box-sizing: border-box;
+}
 `
 
 export default GlobalStyle;

@@ -134,3 +134,42 @@ export async function addImg(imageUpload, imageList) {
         console.error(error);
     }
 }
+
+//데이터베이스에 커뮤니티 게시글 업로드
+export async function addCommunityPost(title, text) {
+    const id = uuid();
+    return set(ref(database, `/community/${id}`), {
+        id,
+        title,
+        text
+    })
+}
+
+//데이터베이스에 있는 커뮤니티 게시글 가져오기
+export async function getCommunityPost() {
+    return get(ref(database, 'community')).then((snapshot) => {
+        if (snapshot.exists()) {
+            return Object.values(snapshot.val())
+        }
+        return []
+    })
+}
+
+//데이터베이스에 커뮤니티 댓글 업로드
+export async function addComment(postId, text) {
+    const id = uuid();
+    return set(ref(database, `/community/${postId}/comment/${id}`), {
+        id,
+        text
+    })
+}
+
+//데이터베이스에 있는 커뮤니티 댓글 가져오기
+export async function getComment() {
+    return get(ref(database, 'comment')).then((snapshot) => {
+        if (snapshot.exists()) {
+            return Object.values(snapshot.val())
+        }
+        return []
+    })
+}
