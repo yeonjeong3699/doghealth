@@ -99,7 +99,7 @@ async function adminUser(user) {
 //데이터베이스에 게시글 업로드
 export async function addPost(category, keyword, title, image) {
     const id = uuid();
-    return set(ref(database, `/post/${id}`), {
+    return set(ref(database, `posts/${id}`), {
         id,
         category,
         keyword,
@@ -119,17 +119,21 @@ export async function getPost() {
 }
 
 //스토리지에 이미지 업로드
-export async function addImg(imageUpload, imageList) {
+export async function addImg(imageUpload, setImageList) {
     const storage = getStorage();
 
     try {
-        const imgRef = storageRef(storage, `images/${imageUpload.name}`);
+        if (imageUpload) {
+            const imgRef = storageRef(storage, `images/${imageUpload.name}`);
 
-        uploadBytes(imgRef, imageUpload).then((snapshot) => {
-            getDownloadURL(snapshot.ref).then((url) => {
-                imageList((prev) => [...prev, url]);
+            uploadBytes(imgRef, imageUpload).then((snapshot) => {
+                getDownloadURL(snapshot.ref).then((url) => {
+                    setImageList((prev) => [...prev, url]);
+                });
             });
-        });
+        } else {
+            console.error('업로드 실패');
+        }
     } catch (error) {
         console.error(error);
     }

@@ -46,7 +46,7 @@ const routes = [ //연결을 하겠다고 선언. children 연결하려면 app.j
         element: <Leg />
       },
       {
-        path: '/health/post',
+        path : '/health/posts/:id',
         element: <Post />
       },
       {

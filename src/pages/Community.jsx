@@ -7,7 +7,6 @@ import { BsFillPencilFill } from "react-icons/bs"
 import CommunityItem from "../component/CommunityItem";
 
 
-
 export default function Community() {
     const {
         isLoading,

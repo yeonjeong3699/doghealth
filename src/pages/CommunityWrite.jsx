@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { addCommunityPost } from "../api/firebase";
+import { addCommunityPost, userState } from "../api/firebase";
+import UserData from "../component/UserData";
 
 
 export default function CommunityWrite() {
@@ -11,6 +12,7 @@ export default function CommunityWrite() {
 
     const [communityTitle, setCommunityTitle] = useState('');
     const [communityText, setCommunityText] = useState('');
+    const [user, setUser] = useState();
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -23,11 +25,22 @@ export default function CommunityWrite() {
         }
     }
 
+    useEffect(() => {
+        userState((user) => {
+            setUser(user);
+        })
+    }, [])
+
     return (
         <CommunityWriteContainer className="container">
             <p className="title">게시글 작성</p>
 
             <form onSubmit={onSubmit}>
+                <div className="writer">
+                    <p>작성자</p>
+                    {user && <UserData user={user} />}
+                </div>
+
                 <div className="write-box">
                     <label htmlFor="communityTitle">제목</label>
                     <input

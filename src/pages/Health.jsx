@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import UsePost from "../api/UsePost";
+import PostList from './PostList'
 
 //icon
 import { PiPlayFill } from "react-icons/pi"
@@ -17,10 +19,12 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectFade, Navigation, Pagination } from "swiper/modules";
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import Content from "../component/Content";
 
 
-export default function Health() {
+
+export default function Health({ post }) {
+    const { postQuery: { data: posts }, } = UsePost();
+
     return (
         <HealthContainer className="container">
 
@@ -77,7 +81,13 @@ export default function Health() {
             </Swiper>
 
             {/* 컨텐츠 */}
-            <Content />
+            <ul>
+                {posts &&
+                    posts.map(item => (
+                        <PostList key={item.id} post={item} />
+                    ))
+                }
+            </ul>
 
         </HealthContainer>
     )

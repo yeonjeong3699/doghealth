@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { addImg, addPost } from "../api/firebase";
 
 //React-quill
@@ -9,11 +9,16 @@ import 'react-quill/dist/quill.snow.css';
 import '../style/quillFonts.css';
 
 
-
 export default function NewPost() {
     //해야할 것: 인덱스 자동 생성, 날짜 자동, 이미지, 출처
+    // const navigate = useNavigate();
 
-    const navigate = useNavigate();
+    const [post, setPost] = useState({
+        title: '',
+        category: '',
+        keyword: '',
+    })
+    const [success, setSuccess] = useState(null);
 
     const [category, setCategory] = useState('');
     const [keyword, setKeyword] = useState('');
@@ -25,13 +30,22 @@ export default function NewPost() {
 
 
     //게시글 업로드
-    const onSubmit = async (e) => {
+    const onSubmit = async (e, image) => {
         e.preventDefault();
 
         try {
-            await addImg(imageUpload, setImageList)
-            await addPost(category, keyword, title);
-            navigate('/health');
+            if (imageUpload) {
+                await addImg(imageUpload, setImageList);
+                await addPost(title, category, keyword);
+                setSuccess('작성 완료');
+                setPost({
+                    title: '',
+                    category: '',
+                    keyword: '',
+                })
+            } else {
+                console.error('업로드 실패');
+            }
         } catch (error) {
             console.error(error);
         }
@@ -121,6 +135,70 @@ export default function NewPost() {
             />
         </NewPostContainer>
     )
+
+    // return (
+    //     <NewPostContainer className="container">
+    //         <form onSubmit={onSubmit}>
+    //             <div className="input-top">
+    //                 <div className="input-top-left">
+    //                     <div className="input-box">
+    //                         <label htmlFor="cataegory">카테고리</label>
+    //                         <input
+    //                             type="text"
+    //                             id="category"
+    //                             required
+    //                             value={category}
+    //                             onChange={(e) => setCategory(e.target.value)}
+    //                         />
+    //                     </div>
+
+    //                     <div className="input-box">
+    //                         <label htmlFor="keyword">키워드</label>
+    //                         <input
+    //                             type="text"
+    //                             id="keyword"
+    //                             required
+    //                             value={keyword}
+    //                             onChange={(e) => setKeyword(e.target.value)}
+    //                         />
+    //                     </div>
+    //                 </div>
+
+    //                 <button type="submit" className="submit-btn">작성하기</button>
+    //             </div>
+
+    //             <div className="input-box">
+    //                 <label htmlFor="title">제목</label>
+    //                 <input
+    //                     type="text"
+    //                     id="title"
+    //                     required
+    //                     value={title}
+    //                     onChange={(e) => setTitle(e.target.value)}
+
+    //                 />
+    //             </div>
+
+    //             <input
+    //                 className="img-upload"
+    //                 type='file'
+    //                 name='file'
+    //                 accept="img/*"
+    //                 onChange={(e) => {
+    //                     setImageUpload(e.target.files[0]);
+    //                 }}
+    //             />
+    //             {imageList.map((el) => {
+    //                 return <img key={el} src={el} />;
+    //             })}
+    //         </form>
+
+    //         <ReactQuill
+    //             className="react-quill"
+    //             modules={modules}
+    //         />
+    //     </NewPostContainer>
+    // )
 }
 
 const NewPostContainer = styled.div`

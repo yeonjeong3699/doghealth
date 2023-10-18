@@ -107,7 +107,7 @@ const CommunityDetailPageContainer = styled.div`
         }
 
         .comment-btn{
-            width: 8.5%;
+            width: 8.4%;
             height: 34px;
             border: none;
             background-color: #999;
