@@ -2,7 +2,6 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { PiPlayFill } from "react-icons/pi"
-import UserData from "./UserData";
 
 export default function CommunityDetail({ post }) {
     const navigate = useNavigate()
@@ -20,7 +19,6 @@ export default function CommunityDetail({ post }) {
         <CommunityDetailContainer>
             <p className="title">{post.title}</p>
             <p className="text">{post.text}</p>
-            <p><UserData user={user} /></p>
             <p className="detail-btn" onClick={detail}>더보기<PiPlayFill className="icon" /></p>
         </CommunityDetailContainer>
     )

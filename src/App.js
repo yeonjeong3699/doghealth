@@ -23,7 +23,6 @@ function App() {
         <ScrollTop />
         <GlobalStyle />
         {url === '/' || url === '/health' ? <Nav /> : <NavChange />}
-        {/* <Nav /> */}
 
         <Routes> {/* index에 연결 후 사용하겠다고 선언 */}
           <Route path='/' element={<Main />} />

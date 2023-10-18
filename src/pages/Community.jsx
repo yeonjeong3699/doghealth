@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { getCommunityPost } from "../api/firebase";
+import { getCommunityPost, userState } from "../api/firebase";
 import styled from "styled-components";
 import { BsFillPencilFill } from "react-icons/bs"
 import CommunityItem from "../component/CommunityItem";
 
 
 export default function Community() {
+    const [user, setUser] = useState();
+
+    useEffect(() => {
+        userState((user) => {
+            setUser(user);
+        })
+    }, [])
+
     const {
         isLoading,
         isError,
@@ -26,7 +34,11 @@ export default function Community() {
         <CommunityContainer className="container">
             <div className="title-wrapper">
                 <p className="title">커뮤니티</p>
-                <Link to='/community/write' className="write"><BsFillPencilFill className="icon" /></Link>
+                {user &&
+                    <Link to='/community/write' className="write">
+                        <BsFillPencilFill className="icon" />
+                    </Link>
+                }
             </div>
 
             <ul className="community-list">
