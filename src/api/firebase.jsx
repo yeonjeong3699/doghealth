@@ -20,8 +20,9 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 const database = getDatabase(app);
+const storage = getStorage(app);
 
-export { auth };
+export { auth, storage };
 
 
 //회원가입
@@ -56,7 +57,6 @@ export async function emailLogin(email, password) {
         console.error(error);
     }
 }
-
 
 //로그아웃
 export async function logout() {
@@ -97,13 +97,15 @@ async function adminUser(user) {
 }
 
 //데이터베이스에 게시글 업로드
-export async function addPost(category, keyword, title) {
+export async function addPost(category, keyword, title, source, image) {
     const id = uuid();
     return set(ref(database, `posts/${id}`), {
         id,
         category,
         keyword,
-        title
+        title,
+        source,
+        image
     })
 }
 
@@ -133,6 +135,20 @@ export async function addImg(imageUpload, setImageList) {
         } else {
             console.error('업로드 실패');
         }
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+//스토리지에 있는 이미지 가져오기
+export async function getImg(imgPath) {
+    const storage = getStorage();
+
+    try {
+        const imgRef = storageRef(storage, `images/${imgPath}`);
+        const downloadURL = await getDownloadURL(imgRef);
+
+        return downloadURL;
     } catch (error) {
         console.error(error);
     }
