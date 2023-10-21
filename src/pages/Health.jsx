@@ -81,7 +81,7 @@ export default function Health({ post }) {
             </Swiper>
 
             {/* 컨텐츠 */}
-            <ul>
+            <ul className="post-wrapper">
                 {posts &&
                     posts.map(item => (
                         <PostList key={item.id} post={item} />
@@ -177,5 +177,13 @@ const HealthContainer = styled.div`
             z-index: 99;
             cursor: pointer;
         }
+    }
+
+    .post-wrapper{
+        padding: 50px 180px 150px;
+        box-sizing: border-box;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 60px 5%;
     }
 `

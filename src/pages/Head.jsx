@@ -1,9 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import Content from "../component/Content";
 import { Link } from "react-router-dom";
+import PostList from './PostList'
+import { getCategory } from "../api/firebase";
 
 export default function Head() {
+    const [post, setPost] = useState([]);
+    const category = '머리 자가진단';
+
+    useEffect(() => {
+        getCategory(category)
+            .then((post) => {
+                setPost(post);
+            })
+            .catch((error) => {
+                console.error(error)
+            })
+    }, [])
+
     return (
         <HeadContainer className="container">
             <div className="category-wrapper">
@@ -12,7 +26,13 @@ export default function Head() {
                 <Link to='/health/leg'>다리 자가진단</Link>
             </div>
 
-            <Content />
+            <ul className="post-wrapper">
+                {post &&
+                    post.map(item => (
+                        <PostList key={item.id} post={item} />
+                    ))
+                }
+            </ul>
         </HeadContainer>
     )
 }
@@ -51,5 +71,13 @@ const HeadContainer = styled.div`
             color: white;
             background-color: #c7d78e;
         }
+    }
+
+    .post-wrapper{
+        padding: 50px 180px 150px;
+        box-sizing: border-box;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 60px 5%;
     }
 `

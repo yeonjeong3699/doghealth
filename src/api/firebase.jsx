@@ -192,3 +192,15 @@ export async function getComment() {
         return []
     })
 }
+
+//카테고리 필터
+export async function getCategory(category) {
+    return get(ref(database, 'posts')).then((snapshot) => {
+        if (snapshot.exists()) {
+            const allPost = Object.values(snapshot.val());
+            const filterPost = allPost.filter((post) => (post.category === category))
+            return filterPost
+        }
+        return [];
+    })
+}
