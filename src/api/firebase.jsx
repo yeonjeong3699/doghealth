@@ -97,7 +97,7 @@ async function adminUser(user) {
 }
 
 //데이터베이스에 게시글 업로드
-export async function addPost(category, keyword, title, source, image) {
+export async function addPost(category, keyword, title, source, content ,image) {
     const id = uuid();
     return set(ref(database, `posts/${id}`), {
         id,
@@ -105,6 +105,7 @@ export async function addPost(category, keyword, title, source, image) {
         keyword,
         title,
         source,
+        content,
         image
     })
 }

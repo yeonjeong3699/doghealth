@@ -1,3 +1,13 @@
+/*toolbar*/
+.ql-snow .ql-picker-label::before {
+  width: 80%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+/*font*/
 @font-face {
   font-family: 'NexonGothicLight';
   src: url('../font/NEXONLv2GothicLight.woff') format('woff');
@@ -53,7 +63,6 @@
   content: "NexonGothicBold" !important;
 }
 
-/* Set content font-families */
 .ql-font-NexonGothicLight {
   font-family: "NexonGothicLight";
 }
@@ -68,4 +77,68 @@
 
 .ql-font-NexonGothicBold {
   font-family: "NexonGothicBold";
+}
+
+/*size*/
+.ql-snow .ql-size .ql-picker-item[data-value='20px']::before {
+  content: '20';
+  font-size: 20px !important;
+}
+
+.ql-snow .ql-size .ql-picker-item[data-value='22px']::before {
+  content: '22';
+  font-size: 22px !important;
+}
+
+.ql-snow .ql-size .ql-picker-item[data-value='24px']::before {
+  content: '24';
+  font-size: 24px !important;
+}
+
+.ql-snow .ql-size .ql-picker-item[data-value='26px']::before {
+  content: '26';
+  font-size: 26px !important;
+}
+
+.ql-snow .ql-size .ql-picker-item[data-value='28px']::before {
+  content: '28';
+  font-size: 28px !important;
+}
+
+.ql-snow .ql-size .ql-picker-item[data-value='30px']::before {
+  content: '30';
+  font-size: 30px !important;
+}
+
+.ql-snow .ql-size .ql-picker-item[data-value='32px']::before {
+  content: '32';
+  font-size: 32px !important;
+}
+
+.ql-size-20px {
+  font-size: 20px;
+}
+
+.ql-size-22px {
+  font-size: 22px;
+}
+
+.ql-size-24px {
+  font-size: 24px;
+}
+
+.ql-size-26px {
+  font-size: 26px;
+}
+
+.ql-size-28px {
+  font-size: 28px;
+}
+
+.ql-size-30px {
+  font-size: 30px;
+}
+
+.ql-size-32px {
+  font-size: 32px;
 }

@@ -83,6 +83,12 @@ const PostListContainer = styled.li`
             font-size: 26px;
             line-height: 1.15;
             color: #111111;
+
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
         }
     }
 

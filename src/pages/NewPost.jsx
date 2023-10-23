@@ -20,9 +20,9 @@ export default function NewPost() {
     const [imgPath, setImgPath] = useState('');
     const [imageUpload, setImageUpload] = useState(null);
     const [imageList, setImageList] = useState([]);
+    const [content, setContent] = useState('');
 
     const navigate = useNavigate();
-
 
 
     //게시글 업로드
@@ -34,7 +34,7 @@ export default function NewPost() {
         try {
             if (imageUpload) {
                 await addImg(imageUpload, setImageList);
-                await addPost(category, keyword, title, source, image);
+                await addPost(category, keyword, title, source, content, image);
                 await navigate('/health');
             } else {
                 console.error('업로드 실패');
@@ -49,13 +49,16 @@ export default function NewPost() {
     Font.whitelist = ['NexonGothicLight', 'NexonGothicRegular', 'NexonGothicMedium', 'NexonGothicBold']
     Quill.register(Font, true)
 
+    const Size = Quill.import('formats/size');
+    Size.whitelist = ['20px', '22px', '24px', '26px', '28px', '30px', '32px'];
+    Quill.register(Size, true);
+
     const modules = {
         toolbar: {
             container: [
-                ["image"],
                 [{ 'font': ['', 'NexonGothicLight', 'NexonGothicRegular', 'NexonGothicMedium', 'NexonGothicBold'] }],
-                [{ 'size': ['small', false, 'large', 'huge'] }],
-                [{ 'header': 1 }, { 'header': 2 }],
+                // [{ 'size': ['small', false, 'large', 'huge'] }],
+                [{ 'size': ['20px', '22px', '24px', '26px', '28px', '30px', '32px'] }],
                 ['bold', 'underline'],
                 [{ 'list': 'ordered' }, { 'list': 'bullet' }],
                 [{ 'align': [] }],
@@ -64,6 +67,18 @@ export default function NewPost() {
             ]
         }
     }
+
+    const formats = [
+        "font",
+        "size",
+        "bold",
+        "underline",
+        "list",
+        "align",
+        "color",
+        "background",
+        "clean"
+    ]
 
     return (
         <NewPostContainer className="container">
@@ -137,6 +152,9 @@ export default function NewPost() {
             <ReactQuill
                 className="react-quill"
                 modules={modules}
+                formats={formats}
+                value={content}
+                onChange={setContent}
             />
         </NewPostContainer>
     )

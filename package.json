@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^13.2.1",
     "@types/react-query": "^1.2.9",
     "axios": "^1.5.1",
+    "dompurify": "^3.0.6",
     "firebase": "^10.4.0",
     "gh-pages": "^6.0.0",
     "react": "^18.2.0",

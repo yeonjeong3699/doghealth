@@ -6,6 +6,8 @@ import sec03_01 from "../images/sec03_01.jpg";
 import sec03_02 from "../images/sec03_02.jpg";
 import { Link, useLocation } from 'react-router-dom';
 
+import * as DOMPurify from "dompurify";
+
 export default function Post() {
     const { state } = useLocation();
     const post = state ? state.post : null;
@@ -35,7 +37,15 @@ export default function Post() {
 
                 <img src={sec03_02} />
 
-                <div className="text-box">
+                {post.content && (
+                    <div
+                        dangerouslySetInnerHTML={{
+                            __html: DOMPurify.sanitize(String(post.content)),
+                        }}
+                    />
+                )}
+
+                {/* <div className="text-box">
                     <p className="title">원인</p>
                     <p className="text">
                         가장 큰 원인은 유전 때문이라고 합니다.<br />
@@ -94,7 +104,7 @@ export default function Post() {
                         · 높은 곳에서 뛰어내리지 못하게 하기<br />
                         · 주기적인 검진으로 확인하기<br />
                     </p>
-                </div>
+                </div> */}
 
                 <p className="source">출처: {post.source}</p>
             </PostContainer>
