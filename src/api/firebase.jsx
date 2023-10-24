@@ -97,10 +97,11 @@ async function adminUser(user) {
 }
 
 //데이터베이스에 게시글 업로드
-export async function addPost(category, keyword, title, source, content ,image) {
+export async function addPost(date, category, keyword, title, source, content, image) {
     const id = uuid();
     return set(ref(database, `posts/${id}`), {
         id,
+        date,
         category,
         keyword,
         title,
@@ -156,10 +157,12 @@ export async function getImg(imgPath) {
 }
 
 //데이터베이스에 커뮤니티 게시글 업로드
-export async function addCommunityPost(title, text) {
+export async function addCommunityPost(user, date, title, text) {
     const id = uuid();
     return set(ref(database, `/community/${id}`), {
         id,
+        user,
+        date,
         title,
         text
     })

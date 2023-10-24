@@ -31,6 +31,7 @@ const PostListContainer = styled.li`
     display: block;
     width: 30%;
     height: 380px;
+    cursor: pointer;
 
     &:hover .img-box img{
         transform: scale(1.1);
@@ -65,6 +66,7 @@ const PostListContainer = styled.li`
                 color: #b2b2b2;
                 margin-left: 16px;
                 position: relative;
+
                 &:before{
                     content: "";
                     display: block;

@@ -11,8 +11,9 @@ import { useNavigate } from "react-router";
 
 
 export default function NewPost() {
-    //해야할 것: 날짜 자동, 이미지
+    //해야할 것: 이미지
 
+    // const [date, setDate] = useState('');
     const [category, setCategory] = useState('');
     const [keyword, setKeyword] = useState('');
     const [source, setSource] = useState('');
@@ -24,6 +25,8 @@ export default function NewPost() {
 
     const navigate = useNavigate();
 
+    const today = new Date();
+    const date = `${today.getFullYear()}년 ${today.getMonth() + 1}월 ${today.getDate()}일`;
 
     //게시글 업로드
     const onSubmit = async (e) => {
@@ -34,7 +37,7 @@ export default function NewPost() {
         try {
             if (imageUpload) {
                 await addImg(imageUpload, setImageList);
-                await addPost(category, keyword, title, source, content, image);
+                await addPost(date, category, keyword, title, source, content, image);
                 await navigate('/health');
             } else {
                 console.error('업로드 실패');
@@ -57,7 +60,6 @@ export default function NewPost() {
         toolbar: {
             container: [
                 [{ 'font': ['', 'NexonGothicLight', 'NexonGothicRegular', 'NexonGothicMedium', 'NexonGothicBold'] }],
-                // [{ 'size': ['small', false, 'large', 'huge'] }],
                 [{ 'size': ['20px', '22px', '24px', '26px', '28px', '30px', '32px'] }],
                 ['bold', 'underline'],
                 [{ 'list': 'ordered' }, { 'list': 'bullet' }],
@@ -68,17 +70,7 @@ export default function NewPost() {
         }
     }
 
-    const formats = [
-        "font",
-        "size",
-        "bold",
-        "underline",
-        "list",
-        "align",
-        "color",
-        "background",
-        "clean"
-    ]
+    const formats = ["font", "size", "bold", "underline", "list", "align", "color", "background", "clean"]
 
     return (
         <NewPostContainer className="container">

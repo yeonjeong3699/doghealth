@@ -2,34 +2,37 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { addCommunityPost, userState } from "../api/firebase";
-import UserData from "../component/UserData";
+import user from "./Community"
 
 
 export default function CommunityWrite() {
-    //날짜(자동), 작성자(자동)
+    const [communityTitle, setCommunityTitle] = useState('');
+    const [communityText, setCommunityText] = useState('');
+    // const [user, setUser] = useState();
 
     const navigate = useNavigate();
 
-    const [communityTitle, setCommunityTitle] = useState('');
-    const [communityText, setCommunityText] = useState('');
-    const [user, setUser] = useState();
+    const today = new Date();
+    const date = `${today.getFullYear()}년 ${today.getMonth() + 1}월 ${today.getDate()}일`;
 
     const onSubmit = async (e) => {
         e.preventDefault();
 
         try {
-            await addCommunityPost(communityTitle, communityText);
+            await addCommunityPost(user, date, communityTitle, communityText);
             navigate('/community');
         } catch (error) {
             console.error(error);
         }
     }
 
-    useEffect(() => {
-        userState((user) => {
-            setUser(user);
-        })
-    }, [])
+    // useEffect(() => {
+    //     userState((user) => {
+    //         setUser(user);
+    //     })
+    // }, [])
+
+    console.log(user)
 
     return (
         <CommunityWriteContainer className="container">
@@ -38,7 +41,7 @@ export default function CommunityWrite() {
             <form onSubmit={onSubmit}>
                 <div className="writer">
                     <p>작성자</p>
-                    {user && <UserData user={user} />}
+                    {user && <p>{user.displayName}</p>}
                 </div>
 
                 <div className="write-box">
@@ -79,6 +82,10 @@ const CommunityWriteContainer = styled.div`
         color: #a5a5a5;
         text-align: center;
         margin-bottom: 30px;
+    }
+
+    .writer{
+        display: flex;
     }
 
     .write-box{

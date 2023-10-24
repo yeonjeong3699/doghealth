@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getCommunityPost, userState } from "../api/firebase";
 import styled from "styled-components";
@@ -7,8 +7,18 @@ import { BsFillPencilFill } from "react-icons/bs"
 import CommunityItem from "../component/CommunityItem";
 
 
-export default function Community() {
+export default function Community({ users }) {
     const [user, setUser] = useState();
+
+    const navigate = useNavigate()
+
+    const userData = () => {
+        navigate(`/community/write`, {
+            state: {
+                email: users.email
+            }
+        })
+    }
 
     useEffect(() => {
         userState((user) => {
@@ -35,7 +45,7 @@ export default function Community() {
             <div className="title-wrapper">
                 <p className="title">커뮤니티</p>
                 {user &&
-                    <Link to='/community/write' className="write">
+                    <Link to='/community/write' className="write" onClick={userData}>
                         <BsFillPencilFill className="icon" />
                     </Link>
                 }

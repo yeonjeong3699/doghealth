@@ -9,6 +9,8 @@ export default function CommunityDetail({ post }) {
         navigate(`/community/${post.id}`, {
             state: {
                 id: post.id,
+                user: post.user,
+                date: post.date,
                 title: post.title,
                 text: post.text
             }
@@ -17,9 +19,18 @@ export default function CommunityDetail({ post }) {
 
     return (
         <CommunityDetailContainer>
-            <p className="title">{post.title}</p>
-            <p className="text">{post.text}</p>
-            <p className="detail-btn" onClick={detail}>더보기<PiPlayFill className="icon" /></p>
+            <div className="detail-top">
+                <p className="title">{post.title}</p>
+                <p className="text">{post.text}</p>
+            </div>
+
+            <div className="detail-bottom">
+                <div className="writer-box">
+                    <p>{post.user}</p>
+                    <p className="date">{post.date}</p>
+                </div>
+                <p className="detail-btn" onClick={detail}>더보기<PiPlayFill className="icon" /></p>
+            </div>
         </CommunityDetailContainer>
     )
 }
@@ -34,58 +45,92 @@ const CommunityDetailContainer = styled.li`
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    gap: 10px;
-    position: relative;
 
-    .title{
-        font-family: 'NexonGothicMedium';
-        font-size: 20px;
-        color: #333333;
+    .detail-top{
+        margin: auto 0px;
+        text-align: center;
 
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 1;
+        .title{
+            font-family: 'NexonGothicMedium';
+            font-size: 20px;
+            color: #333333;
+            margin-bottom: 6px;
+
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
+        }
+
+        .text{
+            font-family: 'NexonGothicLight';
+            font-size: 18px;
+            color: #555555;
+
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+        }
     }
 
-    .text{
-        font-family: 'NexonGothicLight';
-        font-size: 18px;
-        color: #555555;
+    .detail-bottom{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
 
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
-    }
+        .writer-box{
+            display: flex;
 
-    .detail-btn{
-        cursor: pointer;
-        display: inline-block;
-        position: absolute;
-        right: 14px;
-        bottom: 14px;
-        font-family: 'NexonGothicRegular';
-        color: #222222;
-        transition: 0.5s;
+            & > p{
+                font-family: 'NexonGothicRegular';
+                color: #999;
+            }
 
-        .icon{
-            font-size: 10px;
-            color: #222222;
+            .date{
+                position: relative;
+                margin-left: 10px;
+                padding-left: 10px;
+                box-sizing: border-box;
+
+                &:before{
+                    content: "";
+                    display: block;
+                    width: 1px;
+                    height: 15px;
+                    background-color: #d1d1d1;
+                    position: absolute;
+                    top: 50%;
+                    left: 0px;
+                    transform: translateY(-50%);
+                }
+            }
+        }
+
+        .detail-btn{
+            cursor: pointer;
+            font-family: 'NexonGothicRegular';
+            color: #999;
             transition: 0.5s;
-            margin-left: 3px;
-        }
 
-        &:hover{
-            color: #708135;
-        }
+            .icon{
+                font-size: 10px;
+                color: #999;
+                transition: 0.5s;
+                margin-left: 3px;
+            }
 
-        &:hover .icon{
-            color: #708135;
+            &:hover{
+                color: #708135;
+            }
+
+            &:hover .icon{
+                color: #708135;
+            }
         }
     }
 `
