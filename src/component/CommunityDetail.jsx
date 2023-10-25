@@ -26,7 +26,7 @@ export default function CommunityDetail({ post }) {
 
             <div className="detail-bottom">
                 <div className="writer-box">
-                    <p>{post.user}</p>
+                    <p className="user">{post.user}</p>
                     <p className="date">{post.date}</p>
                 </div>
                 <p className="detail-btn" onClick={detail}>더보기<PiPlayFill className="icon" /></p>
@@ -80,6 +80,7 @@ const CommunityDetailContainer = styled.li`
 
     .detail-bottom{
         width: 100%;
+        height: 18px;
         display: flex;
         justify-content: space-between;
 
@@ -89,6 +90,15 @@ const CommunityDetailContainer = styled.li`
             & > p{
                 font-family: 'NexonGothicRegular';
                 color: #999;
+            }
+
+            .user{
+                width: 84px;
+
+                overflow: hidden;
+                text-overflow: ellipsis;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 1;
             }
 
             .date{

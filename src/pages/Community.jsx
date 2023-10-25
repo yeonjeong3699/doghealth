@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getCommunityPost, userState } from "../api/firebase";
 import styled from "styled-components";
@@ -7,24 +7,19 @@ import { BsFillPencilFill } from "react-icons/bs"
 import CommunityItem from "../component/CommunityItem";
 
 
-export default function Community({ users }) {
+export default function Community() {
     const [user, setUser] = useState();
-
-    const navigate = useNavigate()
-
-    const userData = () => {
-        navigate(`/community/write`, {
-            state: {
-                email: users.email
-            }
-        })
-    }
 
     useEffect(() => {
         userState((user) => {
             setUser(user);
         })
     }, [])
+
+    const navigate = useNavigate()
+    const userData = () => {
+        navigate(`/community/write`, { state: { email: user.email } })
+    }
 
     const {
         isLoading,
@@ -45,9 +40,10 @@ export default function Community({ users }) {
             <div className="title-wrapper">
                 <p className="title">커뮤니티</p>
                 {user &&
-                    <Link to='/community/write' className="write" onClick={userData}>
+                    // <Link to='/community/write' className="write" onClick={userData}>
+                    <button className="write" onClick={userData}>
                         <BsFillPencilFill className="icon" />
-                    </Link>
+                    </button>
                 }
             </div>
 
@@ -79,6 +75,9 @@ const CommunityContainer = styled.div`
             position: absolute;
             bottom: 0px;
             right: 0px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
 
             .icon{
                 color: #708135;
