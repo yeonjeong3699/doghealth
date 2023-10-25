@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { PiPlayFill } from "react-icons/pi"
+import { userState } from "../api/firebase";
 
 export default function CommunityDetail({ post }) {
     const navigate = useNavigate()
+
+    const [user, setUser] = useState();
+
+    useEffect(() => {
+        userState((user) => {
+            setUser(user);
+        })
+    }, [])
+
     const detail = () => {
         navigate(`/community/${post.id}`, {
             state: {
@@ -12,7 +22,8 @@ export default function CommunityDetail({ post }) {
                 user: post.user,
                 date: post.date,
                 title: post.title,
-                text: post.text
+                text: post.text,
+                email: user.email
             }
         })
     }

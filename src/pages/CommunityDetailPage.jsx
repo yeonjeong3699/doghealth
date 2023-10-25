@@ -3,10 +3,11 @@ import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { addComment, getComment } from "../api/firebase";
 import { useQuery } from "@tanstack/react-query";
+import CommunityCommentItem from "../component/CommunityCommentItem";
 
 export default function CommunityDetailPage() {
     const state = useLocation().state;
-    const { id, user, date, title, text } = state;
+    const { id, user, date, title, text, email } = state;
 
     const [commentWrite, setCommentWrite] = useState('');
 
@@ -14,7 +15,7 @@ export default function CommunityDetailPage() {
         e.preventDefault();
 
         try {
-            await addComment(id, commentWrite);
+            await addComment(id, email, commentWrite);
             setCommentWrite('');
         } catch (error) {
             console.error(error);
@@ -22,9 +23,20 @@ export default function CommunityDetailPage() {
     }
 
     const {
-        data: comment,
+        isLoading,
+        isError,
+        data: comments,
         error
-    } = useQuery(['comment'], getComment);
+    } = useQuery([`/community/${id}/comments`], getComment(id));
+
+    if (isLoading) {
+        return <p className="alert">글을 받아오고 있습니다.</p>
+    }
+    if (isError) {
+        return <p className="alert">글을 받아오지 못했습니다.</p>
+    }
+
+    console.log(comments)
 
     return (
         <CommunityDetailPageContainer className="container">
@@ -50,24 +62,11 @@ export default function CommunityDetailPage() {
                     <button type="submit" className="comment-btn">작성하기</button>
                 </form>
 
-                <div className="comment-wrapper">
-                    <div className="comment-box">
-                        <span className="user-name">댓글 작성자</span>
-                        <span className="comment">댓글입니다.</span>
-                    </div>
-
-                    <div className="comment-box">
-                        <span className="user-name">댓글 작성자</span>
-                        <span className="comment">댓글입니다.댓글입니다.댓글입니다.댓글입니다.댓글입니다.</span>
-                    </div>
-
-                    <div className="comment-box">
-                        <span className="user-name">댓글 작성자</span>
-                        <span className="comment">
-                            장문의 댓글입니다.장문의 댓글입니다.장문의 댓글입니다.장문의 댓글입니다.장문의 댓글입니다.장문의 댓글입니다.장문의 댓글입니다.장문의 댓글입니다.장문의 댓글입니다.장문의 댓글입니다.장문의 댓글입니다.장문의 댓글입니다.장문의 댓글입니다.장문의 댓글입니다.장문의 댓글입니다.장문의 댓글입니다.장문의 댓글입니다.장문의 댓글입니다.장문의 댓글입니다.장문의 댓글입니다.장문의 댓글입니다.장문의 댓글입니다.장문의 댓글입니다.장문의 댓글입니다.장문의 댓글입니다.장문의 댓글입니다.장문의 댓글입니다.장문의 댓글입니다.
-                        </span>
-                    </div>
-                </div>
+                <ul className="comment-wrapper">
+                    {comments.map((comment) => (
+                        <CommunityCommentItem key={comment.id} comment={comment} />
+                    ))}
+                </ul>
             </div>
         </CommunityDetailPageContainer>
     )
@@ -162,6 +161,7 @@ const CommunityDetailPageContainer = styled.div`
                 font-size: 16px;
                 color: white;
                 letter-spacing: 1px;
+                cursor: pointer;
             }
         }
 
@@ -171,23 +171,6 @@ const CommunityDetailPageContainer = styled.div`
             display: flex;
             flex-direction: column;
             gap: 8px;
-
-            .comment-box{
-                .user-name{
-                    font-family: 'NexonGothicMedium';
-                    font-size: 18px;
-                    color: #555;
-                    margin-right: 8px;
-                }
-
-                .comment{
-                    font-family: 'NexonGothicLight';
-                    font-size: 18px;
-                    color: #222222;
-                    line-height: 1.3;
-                }
-            }
-
         }
     }
 `

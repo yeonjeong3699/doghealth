@@ -179,17 +179,18 @@ export async function getCommunityPost() {
 }
 
 //데이터베이스에 커뮤니티 댓글 업로드
-export async function addComment(postId, text) {
+export async function addComment(postId, user, text) {
     const id = uuid();
-    return set(ref(database, `/community/${postId}/comment/${id}`), {
+    return set(ref(database, `/community/${postId}/comments/${id}`), {
         id,
+        user,
         text
     })
 }
 
 //데이터베이스에 있는 커뮤니티 댓글 가져오기
-export async function getComment() {
-    return get(ref(database, 'comment')).then((snapshot) => {
+export async function getComment(postId) {
+    return get(ref(database, `/community/${postId}/comments`)).then((snapshot) => {
         if (snapshot.exists()) {
             return Object.values(snapshot.val())
         }
