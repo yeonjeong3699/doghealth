@@ -1,15 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { HiHome } from "react-icons/hi";
-import { IoIosArrowForward } from "react-icons/io";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { Link, useLocation } from 'react-router-dom';
-
+import { getCategory } from "../api/firebase";
+import SlidePostList from "../component/SlidePostList";
 import * as DOMPurify from "dompurify";
-import RandomPost from "../component/RandomPost";
+
+//swiper
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+
 
 export default function Post() {
     const { state } = useLocation();
     const post = state ? state.post : null;
+
+    const [categoryPost, setCategoryPost] = useState([]);
+
+    useEffect(() => {
+        getCategory(post.category)
+            .then((post) => {
+                setCategoryPost(post);
+            })
+            .catch((error) => {
+                console.error(error)
+            })
+    }, [])
 
     if (!post) {
         return <p>페이지를 찾을 수 없습니다.</p>;
@@ -47,7 +66,34 @@ export default function Post() {
                 <p className="source">출처: {post.source}</p>
             </PostContainer>
 
-            <RandomPost />
+            <SlidePostContainer className="container">
+                <div className="random-post-wrapper">
+                    <p className="title">함께 읽어보세요!</p>
+
+                    <Swiper className="swiper-container"
+                        slidesPerView={4}
+                        slidesPerGroup={1}
+                        spaceBetween={26}
+                        modules={[Navigation]}
+                        navigation={{
+                            prevEl: '.button-prev',
+                            nextEl: '.button-next'
+                        }}
+                        allowTouchMove={false}
+                    >
+                        {categoryPost &&
+                            categoryPost.map(item => (
+                                post.id === item.id ? '' : <SwiperSlide><SlidePostList key={item.id} post={item} /></SwiperSlide>
+                            ))
+                        }
+                    </Swiper>
+
+                    <IoIosArrowBack className="button-prev" />
+                    <IoIosArrowForward className="button-next" />
+                </div>
+            </SlidePostContainer>
+
+
         </>
     )
 }
@@ -112,5 +158,41 @@ const PostContainer = styled.div`
         font-family: 'NexonGothicRegular';
         font-size: 20px;
         color: #9f9f9f;
+    }
+`
+
+const SlidePostContainer = styled.div`
+    width: 100%;
+    background-color: #ffefbe;
+
+    .random-post-wrapper{
+        padding: 80px 360px;
+        box-sizing: border-box;
+        position: relative;
+
+        & > .title{
+            font-family: 'NexonGothicMedium';
+            font-size: 30px;
+            color: #835b17;
+            margin-bottom: 35px;
+        }
+
+        .button-prev{
+            color: #cda053;
+            font-size: 50px;
+            position: absolute;
+            top: 47%;
+            left: 200px;
+            cursor: pointer;
+        }
+
+        .button-next{
+            color: #cda053;
+            font-size: 50px;
+            position: absolute;
+            top: 47%;
+            right: 200px;
+            cursor: pointer;
+        }
     }
 `

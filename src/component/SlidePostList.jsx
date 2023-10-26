@@ -1,8 +1,9 @@
 import React from "react";
 import { useNavigate } from 'react-router-dom';
 import styled from "styled-components";
+import sec03_01 from "../images/sec03_01.jpg"
 
-export default function RandomPostList({ post }) {
+export default function SlidePostList({ post }) {
     const navigate = useNavigate();
 
     const linkClick = () => {
@@ -10,19 +11,20 @@ export default function RandomPostList({ post }) {
     }
 
     return (
-        <RandomPostListContainer onClick={linkClick}>
+        <SlidePostListContainer onClick={linkClick}>
             <div className="img-box">
+                {/* <img src={sec03_01} /> */}
                 <img src={post.image} />
             </div>
 
             <p className="post-title">
                 {post.title}
             </p>
-        </RandomPostListContainer>
+        </SlidePostListContainer>
     )
 }
 
-const RandomPostListContainer = styled.li`
+const SlidePostListContainer = styled.li`
     width: 280px;
 
     .img-box{
