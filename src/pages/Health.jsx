@@ -22,7 +22,7 @@ import 'swiper/css/pagination';
 
 
 
-export default function Health({ post }) {
+export default function Health() {
     const { postQuery: { data: posts }, } = UsePost();
 
     return (

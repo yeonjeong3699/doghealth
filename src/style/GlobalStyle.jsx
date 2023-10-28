@@ -104,6 +104,10 @@ a{
     padding: 210px 0px 100px;
     box-sizing: border-box;
 }
+
+.color{
+    background-color: #a5a5a5;
+}
 `
 
 export default GlobalStyle;

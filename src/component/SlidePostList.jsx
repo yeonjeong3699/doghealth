@@ -24,8 +24,9 @@ export default function SlidePostList({ post }) {
     )
 }
 
-const SlidePostListContainer = styled.li`
+const SlidePostListContainer = styled.div`
     width: 280px;
+    cursor: pointer;
 
     .img-box{
         width: 100%;
