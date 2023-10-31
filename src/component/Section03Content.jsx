@@ -1,8 +1,8 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { PiPlayFill } from "react-icons/pi"
 import * as DOMPurify from "dompurify";
-import sec03_01 from "../images/sec03_01.jpg"
 
 
 export default function Section03Content({ post }) {
@@ -13,87 +13,80 @@ export default function Section03Content({ post }) {
     }
 
     return (
-        <Section03ContentContainer onClick={linkClick}>
+        <Section03ContentContainer>
+            <p className="category">{post.category}</p>
+
             <div className="img-box">
-                <img src={post?.image} />
-                {/* <img src={sec03_01} /> */}
+                <img src={post.image} />
             </div>
 
             <div className="text-box">
-                <div className="category-box">
-                    <p className="content-category">{post?.category}</p>
-                    <p className="content-keyword">{post?.keyword}</p>
-                </div>
-                <p className="content-title">{post?.title}</p>
+                <p className="title">{post.title}</p>
+
                 {post?.content && (
                     <div
-                        className="content-text"
+                        className="text"
                         dangerouslySetInnerHTML={{
                             __html: DOMPurify.sanitize(String(post.content)),
                         }}
                     />
                 )}
             </div>
+
+            <button onClick={linkClick}>더보기<PiPlayFill className="icon" /></button>
         </Section03ContentContainer>
     )
 }
 
 const Section03ContentContainer = styled.div`
-    width: 49%;
-    display: flex;
-    gap: 20px;
+    width: 330px;
+    height: 440px;
+    position: relative;
+
+    .category{
+        width: 130px;
+        height: 30px;
+        border-radius: 15px;
+        background-color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 175px;
+        left: 25px;
+        color: #222222;
+        font-family: 'NexonGothicRegular';
+        font-size: 18px;
+    }
 
     .img-box{
-        width: 60%;
-        height: 180px;
-        border-radius: 10px;
+        width: 100%;
+        height: 190px;
         overflow: hidden;
+        display: flex;
+        align-items: center;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
 
-        & > img{
+        img{
             width: 100%;
-            height: 100%;
-            transition: 0.5s;
-
-            &:hover{
-                transform: scale(1.1);
-            }
         }
     }
 
     .text-box{
-        .category-box{
-            display: flex;
+        width: 100%;
+        height: 260px;
+        background-color: #f1f1f1;
+        border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 15px;
+        padding: 34px 25px 75px;
+        box-sizing: border-box;
 
-            & > p{
-                font-family: 'NexonGothicMedium';
-                font-size: 18px;
-                color: #888888;
-            }
-
-            .content-keyword{
-                color: #b2b2b2;
-                margin-left: 16px;
-                position: relative;
-
-                &:before{
-                    content: "";
-                    display: block;
-                    width: 1px;
-                    height: 14px;
-                    background-color: #b2b2b2;
-                    position: absolute;
-                    top: 1px;
-                    left: -8px;
-                }
-            }
-        }
-
-        .content-title{
+        .title{
             font-family: 'NexonGothicBold';
-            font-size: 26px;
-            line-height: 1.15;
-            color: #222222;
-            margin: 5px 0px 10px;
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 15px;
 
             overflow: hidden;
             text-overflow: ellipsis;
@@ -102,13 +95,13 @@ const Section03ContentContainer = styled.div`
             -webkit-line-clamp: 1;
         }
 
-        .content-text{
+        .text{
             p, span{
                 font-family: 'NexonGothicLight' !important;
-                font-size: 18px !important;
                 font-weight: 700 !important;
-                line-height: 1.3 !important;
-                color: #555555 !important;
+                font-size: 18px !important;
+                color: #333 !important;
+                line-height: 1.4 !important;
                 background-color: transparent !important;
             }
 
@@ -117,6 +110,24 @@ const Section03ContentContainer = styled.div`
             display: -webkit-box;
             -webkit-box-orient: vertical;
             -webkit-line-clamp: 5;
+        }
+    }
+    
+    button{
+        border: none;
+        background: transparent;
+        font-family: 'NexonGothicRegular';
+        font-size: 18px;
+        color: #333;
+        position: absolute;
+        bottom: 10px;
+        right: 20px;
+        transition: 0.5s;
+        cursor: pointer;
+
+        .icon{
+            font-size: 12px;
+            margin-left: 4px;
         }
     }
 `

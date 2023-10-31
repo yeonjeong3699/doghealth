@@ -10,9 +10,13 @@ export default function Section03() {
     const { postQuery: { data: posts }, } = UsePost();
 
     const postLength = posts?.length;
+    let randomBox = [];
 
-    const random01 = Math.floor(Math.random() * postLength - 1);
-    const random02 = Math.floor(Math.random() * postLength - 1);
+    for (let i = 0; i < 4; i++) {
+        const num = Math.floor(Math.random() * postLength - 1) + 1;
+        randomBox.push(posts?.[num])
+    }
+
 
     return (
         <Section03Container className="container">
@@ -24,16 +28,21 @@ export default function Section03() {
                 </Link>
             </div>
 
-            <div className="content-wrapper">
-                <Section03Content key={posts?.[random01].index} post={posts?.[random01]} />
-                <Section03Content key={posts?.[random02].index} post={posts?.[random02]} />
-            </div>
+
+            <ul className="content-wrapper">
+                {posts &&
+                    randomBox.map((item) => (
+                        <Section03Content key={item.index} post={item} />
+                    ))
+                }
+            </ul>
+
         </Section03Container>
     )
 }
 
 const Section03Container = styled.div`
-    padding: 140px 140px;
+    padding: 140px 140px 160px;
     box-sizing: border-box;
     position: relative;
 
