@@ -25,8 +25,8 @@ export default function Section03() {
             </div>
 
             <div className="content-wrapper">
-                <Section03Content key={posts?.[random01].id} post={posts?.[random01]} />
-                <Section03Content key={posts?.[random02].id} post={posts?.[random02]} />
+                <Section03Content key={posts?.[random01].index} post={posts?.[random01]} />
+                <Section03Content key={posts?.[random02].index} post={posts?.[random02]} />
             </div>
         </Section03Container>
     )

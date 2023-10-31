@@ -27,7 +27,9 @@ export default function CommunityDetailPage() {
         isError,
         data: comments,
         error
-    } = useQuery([`/community/${id}/comments`], getComment(id));
+    } = useQuery([`/community/${id}/comments`], () => getComment(id), {
+        refetchInterval: 1000
+    });
 
     if (isLoading) {
         return <p className="alert">글을 받아오고 있습니다.</p>
@@ -35,8 +37,6 @@ export default function CommunityDetailPage() {
     if (isError) {
         return <p className="alert">글을 받아오지 못했습니다.</p>
     }
-
-    console.log(comments)
 
     return (
         <CommunityDetailPageContainer className="container">

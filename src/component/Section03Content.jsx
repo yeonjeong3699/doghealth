@@ -15,8 +15,8 @@ export default function Section03Content({ post }) {
     return (
         <Section03ContentContainer onClick={linkClick}>
             <div className="img-box">
-                {/* <img src={post?.image} /> */}
-                <img src={sec03_01} />
+                <img src={post?.image} />
+                {/* <img src={sec03_01} /> */}
             </div>
 
             <div className="text-box">
@@ -44,13 +44,14 @@ const Section03ContentContainer = styled.div`
     gap: 20px;
 
     .img-box{
-        width: 300px;
+        width: 60%;
         height: 180px;
         border-radius: 10px;
         overflow: hidden;
 
         & > img{
             width: 100%;
+            height: 100%;
             transition: 0.5s;
 
             &:hover{

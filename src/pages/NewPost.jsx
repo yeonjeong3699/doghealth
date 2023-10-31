@@ -1,19 +1,20 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { addImg, addPost, getImg, storage } from "../api/firebase";
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { useNavigate } from "react-router";
 
 //React-quill
 import ReactQuill, { Quill } from "react-quill";
 import 'react-quill/dist/quill.snow.css';
 import '../style/quillFonts.css';
-import { useNavigate } from "react-router";
+
 
 
 
 export default function NewPost() {
     //해야할 것: 이미지
 
-    // const [date, setDate] = useState('');
     const [category, setCategory] = useState('');
     const [keyword, setKeyword] = useState('');
     const [source, setSource] = useState('');
@@ -32,18 +33,20 @@ export default function NewPost() {
     const onSubmit = async (e) => {
         e.preventDefault();
 
-        const image = getImg(imgPath.name, storage);
-
         try {
+            let imageUrl = "";
+
             if (imageUpload) {
-                await addImg(imageUpload, setImageList);
-                await addPost(date, category, keyword, title, source, content, image);
-                await navigate('/health');
-            } else {
-                console.error('업로드 실패');
+                const storageInstance = getStorage();
+                const imgRef = ref(storageInstance, `images/${imageUpload.name}`)
+                await uploadBytes(imgRef, imageUpload);
+                imageUrl = await getDownloadURL(imgRef);
+                setImageList(prev => [...prev, imageUrl]);
             }
+            await addPost(date, category, keyword, title, source, content, imageUrl);
+            navigate('/health');
         } catch (error) {
-            console.error(error);
+            console.error('업로드 실패', error);
         }
     }
 

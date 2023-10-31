@@ -152,6 +152,7 @@ const PostContainer = styled.div`
 
     .content-box{
         margin-bottom: 50px;
+        line-height: 1.3;
     }
 
     .source{

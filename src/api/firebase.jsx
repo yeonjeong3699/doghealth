@@ -97,7 +97,7 @@ async function adminUser(user) {
 }
 
 //데이터베이스에 게시글 업로드
-export async function addPost(date, category, keyword, title, source, content, image) {
+export async function addPost(date, category, keyword, title, source, content, image, storage) {
     const id = uuid();
     return set(ref(database, `posts/${id}`), {
         id,
@@ -127,7 +127,7 @@ export async function addImg(imageUpload, setImageList) {
 
     try {
         if (imageUpload) {
-            const imgRef = storageRef(storage, `images/${imageUpload.name}`);
+            const imgRef = storageRef(storage, `images/${imageUpload}`);
 
             uploadBytes(imgRef, imageUpload).then((snapshot) => {
                 getDownloadURL(snapshot.ref).then((url) => {
@@ -147,25 +147,32 @@ export async function getImg(imgPath) {
     const storage = getStorage();
 
     try {
+        console.log(imgPath);
+
         const imgRef = storageRef(storage, `images/${imgPath}`);
         const downloadURL = await getDownloadURL(imgRef);
 
         return downloadURL;
     } catch (error) {
         console.error(error);
+        throw error;
     }
 }
 
 //데이터베이스에 커뮤니티 게시글 업로드
-export async function addCommunityPost(user, date, title, text) {
+export async function addCommunityPost(user, date, title, text, images) {
     const id = uuid();
-    return set(ref(database, `/community/${id}`), {
+    const postData = {
         id,
         user,
         date,
         title,
         text
-    })
+    };
+    if (images !== undefined) {
+        postData.images = images;
+    }
+    return set(ref(database, `/community/${id}`), postData);
 }
 
 //데이터베이스에 있는 커뮤니티 게시글 가져오기
