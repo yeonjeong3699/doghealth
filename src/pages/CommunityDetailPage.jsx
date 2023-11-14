@@ -1,11 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
-import { addComment, getComment } from "../api/firebase";
+import { addComment, getComment, userState } from "../api/firebase";
 import { useQuery } from "@tanstack/react-query";
 import CommunityCommentItem from "../component/CommunityCommentItem";
 
 export default function CommunityDetailPage() {
+    const [loginUser, setLoginUser] = useState();
+
+    useEffect(() => {
+        userState((user) => {
+            setLoginUser(user);
+        })
+    }, [])
+    // console.log(loginUser);
+
     const state = useLocation().state;
     const { id, user, date, title, text, email } = state;
 
@@ -38,6 +47,7 @@ export default function CommunityDetailPage() {
         return <p className="alert">글을 받아오지 못했습니다.</p>
     }
 
+
     return (
         <CommunityDetailPageContainer className="container">
             <div className="post-box">
@@ -51,13 +61,22 @@ export default function CommunityDetailPage() {
 
             <div className="comment-container">
                 <form onSubmit={onSubmit}>
-                    <input
-                        type="text"
-                        value={commentWrite}
-                        onChange={(e) => setCommentWrite(e.target.value)}
-                        placeholder="댓글을 작성해 주세요."
-                        className="comment-write"
-                    />
+                    {loginUser == null ?
+                        <input
+                            type="text"
+                            placeholder="로그인 후 작성할 수 있습니다."
+                            className="comment-write comment-disabled"
+                            disabled
+                        />
+                        :
+                        <input
+                            type="text"
+                            value={commentWrite}
+                            onChange={(e) => setCommentWrite(e.target.value)}
+                            placeholder="댓글을 작성해 주세요."
+                            className="comment-write"
+                        />
+                    }
 
                     <button type="submit" className="comment-btn">작성하기</button>
                 </form>
@@ -148,6 +167,10 @@ const CommunityDetailPageContainer = styled.div`
                 font-family: 'NexonGothicRegular';
                 font-size: 16px;
                 text-indent: 8px;
+            }
+
+            .comment-disabled{
+                background-color: rgba(255, 255, 255, 0.5);
             }
 
             .comment-btn{

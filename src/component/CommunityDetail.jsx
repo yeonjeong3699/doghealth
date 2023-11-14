@@ -7,14 +7,6 @@ import { userState } from "../api/firebase";
 export default function CommunityDetail({ post }) {
     const navigate = useNavigate()
 
-    const [user, setUser] = useState();
-
-    useEffect(() => {
-        userState((user) => {
-            setUser(user);
-        })
-    }, [])
-
     const detail = () => {
         navigate(`/community/${post.id}`, {
             state: {
@@ -23,7 +15,6 @@ export default function CommunityDetail({ post }) {
                 date: post.date,
                 title: post.title,
                 text: post.text,
-                email: user.email
             }
         })
     }
