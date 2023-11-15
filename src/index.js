@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { RouterProvider, createBrowserRouter, createHashRouter } from 'react-router-dom';
 
 //page
 import App from './App';
@@ -81,7 +81,8 @@ const routes = [ //연결을 하겠다고 선언. children 연결하려면 app.j
   }
 ]
 
-const router = createBrowserRouter(routes, { basename: basename });
+// const router = createBrowserRouter(routes, { basename: basename });
+const router = createHashRouter(routes);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
