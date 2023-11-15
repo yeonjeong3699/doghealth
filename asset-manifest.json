@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/doghealth/static/css/main.6432ead4.css",
-    "main.js": "/doghealth/static/js/main.660eab3f.js",
+    "main.js": "/doghealth/static/js/main.a6cd2b18.js",
     "static/js/787.3e751639.chunk.js": "/doghealth/static/js/787.3e751639.chunk.js",
     "static/media/sec03_01.jpg": "/doghealth/static/media/sec03_01.d4707dfd09d607bb47ea.jpg",
     "static/media/Cafe24Ssurround.woff": "/doghealth/static/media/Cafe24Ssurround.67fc244cdc9006614e35.woff",
@@ -24,11 +24,11 @@
     "static/media/sec04_bg.png": "/doghealth/static/media/sec04_bg.6b5bf9a504eb9c0c2a6c.png",
     "index.html": "/doghealth/index.html",
     "main.6432ead4.css.map": "/doghealth/static/css/main.6432ead4.css.map",
-    "main.660eab3f.js.map": "/doghealth/static/js/main.660eab3f.js.map",
+    "main.a6cd2b18.js.map": "/doghealth/static/js/main.a6cd2b18.js.map",
     "787.3e751639.chunk.js.map": "/doghealth/static/js/787.3e751639.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.6432ead4.css",
-    "static/js/main.660eab3f.js"
+    "static/js/main.a6cd2b18.js"
   ]
 }
