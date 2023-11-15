@@ -13,10 +13,12 @@ export default function CommunityDetailPage() {
             setLoginUser(user);
         })
     }, [])
-    // console.log(loginUser);
+
+    const loginEmail = loginUser?.email;
+    // console.log(loginEmail);
 
     const state = useLocation().state;
-    const { id, user, date, title, text, email } = state;
+    const { id, user, date, title, text } = state;
 
     const [commentWrite, setCommentWrite] = useState('');
 
@@ -24,7 +26,7 @@ export default function CommunityDetailPage() {
         e.preventDefault();
 
         try {
-            await addComment(id, email, commentWrite);
+            await addComment(id, loginEmail, commentWrite);
             setCommentWrite('');
         } catch (error) {
             console.error(error);
