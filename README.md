@@ -2,7 +2,7 @@
 
 # `doghealth`
 
-강아지의 건강을 자가진단 할 수 있는 리액트 기반의 반응형 홈페이지를 제작하였습니다.<br>
+강아지의 건강을 자가진단 할 수 있는 리액트 기반의 홈페이지를 제작하였습니다.<br>
 
 <a href="https://yeonjeong3699.github.io/doghealth/" title="작업물 바로가기">바로가기</a>
 
